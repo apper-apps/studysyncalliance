@@ -20,7 +20,7 @@ const Grades = () => {
     const distribution = { A: 0, B: 0, C: 0, D: 0, F: 0 };
     
     courses.forEach(course => {
-      const grade = course.currentGrade || 0;
+const grade = course.current_grade_c || 0;
       if (grade >= 90) distribution.A++;
       else if (grade >= 80) distribution.B++;
       else if (grade >= 70) distribution.C++;
@@ -34,10 +34,10 @@ const Grades = () => {
   const calculateOverallGPA = () => {
     if (courses.length === 0) return 0;
     
-    const totalCredits = courses.reduce((sum, course) => sum + course.credits, 0);
+const totalCredits = courses.reduce((sum, course) => sum + (course.credits_c || 0), 0);
     const weightedGrades = courses.reduce((sum, course) => {
-      const gradePoints = getGradePoints(course.currentGrade || 0);
-      return sum + (gradePoints * course.credits);
+      const gradePoints = getGradePoints(course.current_grade_c || 0);
+      return sum + (gradePoints * (course.credits_c || 0));
     }, 0);
     
     return totalCredits > 0 ? (weightedGrades / totalCredits).toFixed(2) : "0.00";
@@ -79,8 +79,8 @@ const Grades = () => {
   };
 
   const getRecentGradedAssignments = () => {
-    return assignments
-      .filter(assignment => assignment.grade !== null && assignment.grade !== undefined)
+return assignments
+      .filter(assignment => assignment.grade_c !== null && assignment.grade_c !== undefined)
       .sort((a, b) => new Date(b.dueDate) - new Date(a.dueDate))
       .slice(0, 5);
   };
@@ -124,8 +124,8 @@ const Grades = () => {
           >
             <option value="all">All Courses</option>
             {courses.map(course => (
-              <option key={course.Id} value={course.Id}>
-                {course.code} - {course.name}
+<option key={course.Id} value={course.Id}>
+                {course.code_c} - {course.name_c}
               </option>
             ))}
           </select>
@@ -164,8 +164,8 @@ const Grades = () => {
                   <div>
                     <p className="text-green-100 text-sm font-medium">Average Grade</p>
                     <p className="text-3xl font-bold">
-                      {courses.length > 0 
-                        ? Math.round(courses.reduce((sum, course) => sum + (course.currentGrade || 0), 0) / courses.length)
+{courses.length > 0 
+                        ? Math.round(courses.reduce((sum, course) => sum + (course.current_grade_c || 0), 0) / courses.length)
                         : 0}%
                     </p>
                   </div>
@@ -235,15 +235,15 @@ const Grades = () => {
                 {recentGraded.length > 0 ? (
                   <div className="space-y-3">
                     {recentGraded.map((assignment) => {
-                      const course = courses.find(c => c.Id === assignment.courseId);
+const course = courses.find(c => c.Id === assignment.course_id_c?.Id);
                       return (
                         <div key={assignment.Id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                           <div className="flex-1">
-                            <p className="font-medium text-gray-900 text-sm truncate">
-                              {assignment.title}
+<p className="font-medium text-gray-900 text-sm truncate">
+                              {assignment.title_c}
                             </p>
                             <p className="text-xs text-gray-500">
-                              {course?.code} • {format(new Date(assignment.dueDate), "MMM d")}
+                              {course?.code_c} • {format(new Date(assignment.due_date_c), "MMM d")}
                             </p>
                           </div>
                           <div className="text-right">
@@ -278,7 +278,7 @@ const Grades = () => {
               <Card.Content>
                 <div className="space-y-4">
                   {filteredCourses.map((course) => {
-                    const currentGrade = course.currentGrade || 0;
+const currentGrade = course.current_grade_c || 0;
                     const letterGrade = getLetterGrade(currentGrade);
                     const gradePoints = getGradePoints(currentGrade);
                     
@@ -287,11 +287,11 @@ const Grades = () => {
                         <div className="flex items-center space-x-4">
                           <div 
                             className="w-3 h-3 rounded-full"
-                            style={{ backgroundColor: course.color }}
+                            style={{ backgroundColor: course.color_c }}
                           />
                           <div>
-                            <h4 className="font-medium text-gray-900">{course.name}</h4>
-                            <p className="text-sm text-gray-500">{course.code} • {course.credits} credits</p>
+                            <h4 className="font-medium text-gray-900">{course.name_c}</h4>
+                            <p className="text-sm text-gray-500">{course.code_c} • {course.credits_c} credits</p>
                           </div>
                         </div>
                         <div className="flex items-center space-x-4">

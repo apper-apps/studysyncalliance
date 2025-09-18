@@ -99,25 +99,25 @@ const Students = () => {
   const filteredAndSortedStudents = students
     .filter(student => {
       const matchesSearch = 
-        student.studentName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        student.studentEmail?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        student.assignedCounselor?.toLowerCase().includes(searchTerm.toLowerCase());
+student.student_name_c?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        student.student_email_c?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        student.assigned_counselor_c?.toLowerCase().includes(searchTerm.toLowerCase());
       
-      const matchesGrade = gradeFilter === "all" || student.gradeLevel === gradeFilter;
-      const matchesStatus = statusFilter === "all" || student.enrollmentStatus === statusFilter;
+      const matchesGrade = gradeFilter === "all" || student.grade_level_c === gradeFilter;
+      const matchesStatus = statusFilter === "all" || student.enrollment_status_c === statusFilter;
       
       return matchesSearch && matchesGrade && matchesStatus;
     })
     .sort((a, b) => {
       switch (sortBy) {
         case "name":
-          return (a.studentName || "").localeCompare(b.studentName || "");
+return (a.student_name_c || "").localeCompare(b.student_name_c || "");
         case "cgpa":
-          return (b.cgpa || 0) - (a.cgpa || 0);
+          return (b.cgpa_c || 0) - (a.cgpa_c || 0);
         case "credits":
-          return (b.completedCredits || 0) - (a.completedCredits || 0);
+          return (b.completed_credits_c || 0) - (a.completed_credits_c || 0);
         case "attendance":
-          return (b.attendancePercentage || 0) - (a.attendancePercentage || 0);
+          return (b.attendance_percentage_c || 0) - (a.attendance_percentage_c || 0);
         default:
           return 0;
       }
@@ -141,10 +141,10 @@ const Students = () => {
 
   const stats = {
     total: students.length,
-    active: students.filter(s => s.enrollmentStatus === "Active").length,
+active: students.filter(s => s.enrollment_status_c === "Active").length,
     avgCgpa: students.length > 0 ? 
-      (students.reduce((sum, s) => sum + (s.cgpa || 0), 0) / students.length).toFixed(2) : "0.00",
-    totalCredits: students.reduce((sum, s) => sum + (s.completedCredits || 0), 0)
+      (students.reduce((sum, s) => sum + (s.cgpa_c || 0), 0) / students.length).toFixed(2) : "0.00",
+    totalCredits: students.reduce((sum, s) => sum + (s.completed_credits_c || 0), 0)
   };
 
   return (
@@ -268,11 +268,11 @@ const Students = () => {
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center space-x-3">
                     <div className="w-12 h-12 bg-gradient-to-r from-primary-500 to-primary-600 rounded-full flex items-center justify-center text-white font-bold">
-                      {student.studentName?.charAt(0) || "S"}
+{student.student_name_c?.charAt(0) || "S"}
                     </div>
                     <div>
                       <h3 className="font-semibold text-gray-900 text-lg leading-tight">
-                        {student.studentName || "Unnamed Student"}
+                        {student.student_name_c || "Unnamed Student"}
                       </h3>
                       <p className="text-gray-500 text-sm">{student.studentEmail || "No email"}</p>
                     </div>
@@ -286,22 +286,22 @@ const Students = () => {
                 <div className="space-y-3">
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-gray-600">Grade Level:</span>
-                    <Badge variant={getGradeLevelBadge(student.gradeLevel)}>
-                      {student.gradeLevel || "N/A"}
+<Badge variant={getGradeLevelBadge(student.grade_level_c)}>
+                      {student.grade_level_c || "N/A"}
                     </Badge>
                   </div>
                   
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-gray-600">CGPA:</span>
                     <span className="font-semibold text-gray-900">
-                      {student.cgpa?.toFixed(2) || "0.00"}
+                      {student.cgpa_c?.toFixed(2) || "0.00"}
                     </span>
                   </div>
                   
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-gray-600">Credits:</span>
                     <span className="font-semibold text-gray-900">
-                      {student.completedCredits || 0}
+                      {student.completed_credits_c || 0}
                     </span>
                   </div>
                   
@@ -311,46 +311,46 @@ const Students = () => {
                       <div className="w-16 bg-gray-200 rounded-full h-2">
                         <div 
                           className="bg-gradient-to-r from-success-500 to-success-600 h-2 rounded-full transition-all duration-300"
-                          style={{ width: `${student.attendancePercentage || 0}%` }}
+                          style={{ width: `${student.attendance_percentage_c || 0}%` }}
                         />
                       </div>
                       <span className="text-sm font-medium text-gray-900">
-                        {student.attendancePercentage || 0}%
+                        {student.attendance_percentage_c || 0}%
                       </span>
                     </div>
                   </div>
 
-                  {student.studentInterests && (
+                  {student.student_interests_c && (
                     <div className="flex justify-between items-start">
                       <span className="text-sm text-gray-600">Interests:</span>
                       <div className="flex flex-wrap gap-1 justify-end max-w-32">
-                        {student.studentInterests.slice(0, 2).map((interest, index) => (
+                        {student.student_interests_c.slice(0, 2).map((interest, index) => (
                           <Badge key={index} variant="default" className="text-xs">
                             {interest}
                           </Badge>
                         ))}
-                        {student.studentInterests.length > 2 && (
+                        {student.student_interests_c.length > 2 && (
                           <Badge variant="default" className="text-xs">
-                            +{student.studentInterests.length - 2}
+                            +{student.student_interests_c.length - 2}
                           </Badge>
                         )}
                       </div>
                     </div>
                   )}
 
-                  {student.scholarshipAmount && (
+                  {student.scholarship_amount_c && (
                     <div className="flex justify-between items-center">
                       <span className="text-sm text-gray-600">Scholarship:</span>
                       <span className="font-semibold text-success-600">
-                        {formatCurrency(student.scholarshipAmount.amount, student.scholarshipAmount.currency)}
+                        {formatCurrency(student.scholarship_amount_c, "USD")}
                       </span>
                     </div>
                   )}
 
-                  {student.studentSatisfactionRating && (
+                  {student.student_satisfaction_rating_c && (
                     <div className="flex justify-between items-center">
                       <span className="text-sm text-gray-600">Satisfaction:</span>
-                      {renderRating(student.studentSatisfactionRating)}
+                      {renderRating(student.student_satisfaction_rating_c)}
                     </div>
                   )}
                 </div>

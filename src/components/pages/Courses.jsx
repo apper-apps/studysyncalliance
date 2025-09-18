@@ -20,11 +20,11 @@ const Courses = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedSemester, setSelectedSemester] = useState("all");
 
-  const getUpcomingAssignmentsCount = (courseId) => {
+const getUpcomingAssignmentsCount = (courseId) => {
     return assignments.filter(assignment => 
-      assignment.courseId === courseId && 
-      new Date(assignment.dueDate) > new Date() && 
-      assignment.status !== "completed"
+      assignment.course_id_c?.Id === courseId && 
+      new Date(assignment.due_date_c) > new Date() && 
+      assignment.status_c !== "completed"
     ).length;
   };
 
@@ -63,10 +63,10 @@ const Courses = () => {
     setEditingCourse(null);
   };
 
-  const filteredCourses = courses.filter(course => {
-    const matchesSearch = course.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         course.code.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         course.instructor.toLowerCase().includes(searchTerm.toLowerCase());
+const filteredCourses = courses.filter(course => {
+    const matchesSearch = course.name_c?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         course.code_c?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         course.instructor_c?.toLowerCase().includes(searchTerm.toLowerCase());
     
     // For demo purposes, we'll show all courses regardless of semester
     const matchesSemester = selectedSemester === "all" || true;
@@ -143,8 +143,8 @@ const Courses = () => {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-accent-100 text-sm">Total Credits</p>
-              <p className="text-2xl font-bold">
-                {courses.reduce((sum, course) => sum + course.credits, 0)}
+<p className="text-2xl font-bold">
+                {courses.reduce((sum, course) => sum + (course.credits_c || 0), 0)}
               </p>
             </div>
             <ApperIcon name="Award" size={20} />
@@ -156,8 +156,8 @@ const Courses = () => {
             <div>
               <p className="text-green-100 text-sm">Avg Grade</p>
               <p className="text-2xl font-bold">
-                {courses.length > 0 
-                  ? Math.round(courses.reduce((sum, course) => sum + (course.currentGrade || 0), 0) / courses.length)
+{courses.length > 0 
+                  ? Math.round(courses.reduce((sum, course) => sum + (course.current_grade_c || 0), 0) / courses.length)
                   : 0}%
               </p>
             </div>
@@ -170,7 +170,7 @@ const Courses = () => {
             <div>
               <p className="text-secondary-100 text-sm">Active Tasks</p>
               <p className="text-2xl font-bold">
-                {assignments.filter(a => a.status !== "completed").length}
+{assignments.filter(a => a.status_c !== "completed").length}
               </p>
             </div>
             <ApperIcon name="Clock" size={20} />

@@ -98,13 +98,13 @@ const Faculty = () => {
   };
 
   const filteredFaculty = faculty.filter((member) => {
-    const matchesSearch = member.facultyName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      member.officialEmail?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      member.subjectsTaught?.some(subject => 
+const matchesSearch = member.faculty_name_c?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      member.official_email_c?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      member.subjects_taught_c?.some(subject => 
         subject.toLowerCase().includes(searchQuery.toLowerCase())
       );
     
-    const matchesDepartment = !departmentFilter || member.department === departmentFilter;
+    const matchesDepartment = !departmentFilter || member.department_c === departmentFilter;
     
     return matchesSearch && matchesDepartment;
   });
@@ -166,16 +166,16 @@ const Faculty = () => {
               <div className="p-6">
                 <div className="flex justify-between items-start mb-4">
                   <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">
-                      {member.facultyName}
+<h3 className="text-lg font-semibold text-gray-900 mb-1">
+                      {member.faculty_name_c}
                     </h3>
-                    <p className="text-sm text-gray-600 mb-2">{member.officialEmail}</p>
+                    <p className="text-sm text-gray-600 mb-2">{member.official_email_c}</p>
                     <div className="flex flex-wrap gap-2 mb-3">
-                      <Badge className={getDepartmentBadge(member.department)}>
-                        {member.department}
+                      <Badge className={getDepartmentBadge(member.department_c)}>
+                        {member.department_c}
                       </Badge>
-                      <Badge className={getStatusBadge(member.employmentStatus)}>
-                        {member.employmentStatus}
+                      <Badge className={getStatusBadge(member.employment_status_c)}>
+                        {member.employment_status_c}
                       </Badge>
                     </div>
                   </div>
@@ -199,58 +199,58 @@ const Faculty = () => {
                 </div>
 
                 <div className="space-y-2 text-sm">
-                  <div className="flex justify-between">
+<div className="flex justify-between">
                     <span className="text-gray-600">Experience:</span>
-                    <span className="font-medium">{member.yearsOfExperience} years</span>
+                    <span className="font-medium">{member.years_of_experience_c} years</span>
                   </div>
                   
                   <div className="flex justify-between">
                     <span className="text-gray-600">Teaching Hours:</span>
-                    <span className="font-medium">{member.weeklyTeachingHours}/week</span>
+                    <span className="font-medium">{member.weekly_teaching_hours_c}/week</span>
                   </div>
 
                   <div className="flex justify-between">
                     <span className="text-gray-600">Publications:</span>
-                    <span className="font-medium">{member.numberOfPublications}</span>
+                    <span className="font-medium">{member.number_of_publications_c}</span>
                   </div>
 
                   <div className="flex justify-between">
                     <span className="text-gray-600">Salary:</span>
                     <span className="font-medium">
-                      {formatCurrency(member.monthlySalary?.amount, member.monthlySalary?.currency)}
+                      {formatCurrency(member.monthly_salary_c, "USD")}
                     </span>
                   </div>
 
                   <div className="flex justify-between">
                     <span className="text-gray-600">Tenured:</span>
-                    <span className={`font-medium ${member.isTenured ? 'text-green-600' : 'text-gray-600'}`}>
-                      {member.isTenured ? 'Yes' : 'No'}
+                    <span className={`font-medium ${member.is_tenured_c ? 'text-green-600' : 'text-gray-600'}`}>
+                      {member.is_tenured_c ? 'Yes' : 'No'}
                     </span>
                   </div>
 
-                  {member.subjectsTaught && member.subjectsTaught.length > 0 && (
+                  {member.subjects_taught_c && member.subjects_taught_c.length > 0 && (
                     <div className="pt-2">
                       <span className="text-gray-600 text-xs">Subjects:</span>
                       <div className="flex flex-wrap gap-1 mt-1">
-                        {member.subjectsTaught.slice(0, 3).map((subject, index) => (
+                        {member.subjects_taught_c.slice(0, 3).map((subject, index) => (
                           <Badge key={index} variant="secondary" className="text-xs">
                             {subject}
                           </Badge>
                         ))}
-                        {member.subjectsTaught.length > 3 && (
+                        {member.subjects_taught_c.length > 3 && (
                           <Badge variant="secondary" className="text-xs">
-                            +{member.subjectsTaught.length - 3}
+                            +{member.subjects_taught_c.length - 3}
                           </Badge>
                         )}
                       </div>
                     </div>
                   )}
 
-                  {member.facultyRating && (
+                  {member.faculty_rating_c && (
                     <div className="pt-2">
                       <span className="text-gray-600 text-xs">Rating:</span>
                       <div className="mt-1">
-                        {renderRating(member.facultyRating)}
+                        {renderRating(member.faculty_rating_c)}
                       </div>
                     </div>
                   )}

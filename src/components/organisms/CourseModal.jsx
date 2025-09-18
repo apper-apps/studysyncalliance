@@ -5,32 +5,32 @@ import FormField from "@/components/molecules/FormField";
 import { toast } from "react-toastify";
 
 const CourseModal = ({ isOpen, onClose, onSave, editCourse = null }) => {
-  const [formData, setFormData] = useState({
-    name: "",
-    code: "",
-    instructor: "",
-    credits: 3,
-    color: "#4F46E5",
-    schedule: []
+const [formData, setFormData] = useState({
+    name_c: "",
+    code_c: "",
+    instructor_c: "",
+    credits_c: 3,
+    color_c: "#4F46E5",
+    schedule_c: []
   });
 
   const [scheduleInput, setScheduleInput] = useState("");
 
   useEffect(() => {
     if (editCourse) {
-      setFormData({
+setFormData({
         ...editCourse,
-        schedule: editCourse.schedule || []
+        schedule_c: editCourse.schedule_c || []
       });
       setScheduleInput(editCourse.schedule?.join(", ") || "");
     } else {
-      setFormData({
-        name: "",
-        code: "",
-        instructor: "",
-        credits: 3,
-        color: "#4F46E5",
-        schedule: []
+setFormData({
+        name_c: "",
+        code_c: "",
+        instructor_c: "",
+        credits_c: 3,
+        color_c: "#4F46E5",
+        schedule_c: []
       });
       setScheduleInput("");
     }
@@ -49,10 +49,10 @@ const CourseModal = ({ isOpen, onClose, onSave, editCourse = null }) => {
       .map(item => item.trim())
       .filter(item => item.length > 0);
 
-    const courseData = {
+const courseData = {
       ...formData,
-      schedule,
-      credits: Number(formData.credits)
+      schedule_c: schedule,
+      credits_c: Number(formData.credits_c)
     };
 
     onSave(courseData);
@@ -90,8 +90,8 @@ const CourseModal = ({ isOpen, onClose, onSave, editCourse = null }) => {
         <FormField
           label="Course Name"
           type="text"
-          name="name"
-          value={formData.name}
+name="name_c"
+          value={formData.name_c}
           onChange={handleChange}
           placeholder="Introduction to Computer Science"
           required
@@ -100,8 +100,8 @@ const CourseModal = ({ isOpen, onClose, onSave, editCourse = null }) => {
         <FormField
           label="Course Code"
           type="text"
-          name="code"
-          value={formData.code}
+name="code_c"
+          value={formData.code_c}
           onChange={handleChange}
           placeholder="CS 101"
           required
@@ -109,8 +109,8 @@ const CourseModal = ({ isOpen, onClose, onSave, editCourse = null }) => {
 
         <FormField
           label="Instructor"
-          type="text"
-          name="instructor"
+type="text"
+          name="instructor_c"
           value={formData.instructor}
           onChange={handleChange}
           placeholder="Dr. Smith"
@@ -122,7 +122,7 @@ const CourseModal = ({ isOpen, onClose, onSave, editCourse = null }) => {
             label="Credits"
             type="number"
             name="credits"
-            value={formData.credits}
+value={formData.credits_c}
             onChange={handleChange}
             min="1"
             max="6"
@@ -132,7 +132,7 @@ const CourseModal = ({ isOpen, onClose, onSave, editCourse = null }) => {
           <FormField label="Color">
             <select
               name="color"
-              value={formData.color}
+value={formData.color_c}
               onChange={handleChange}
               className="flex h-10 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
             >

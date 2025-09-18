@@ -76,29 +76,29 @@ const Assignments = () => {
     setEditingAssignment(null);
   };
 
-  const getAssignmentStatus = (assignment) => {
-    if (assignment.status === "completed") return "completed";
-    if (isAfter(new Date(), new Date(assignment.dueDate))) return "overdue";
-    if (isToday(new Date(assignment.dueDate))) return "in-progress";
+const getAssignmentStatus = (assignment) => {
+    if (assignment.status_c === "completed") return "completed";
+    if (isAfter(new Date(), new Date(assignment.due_date_c))) return "overdue";
+    if (isToday(new Date(assignment.due_date_c))) return "in-progress";
     return "pending";
   };
 
-  const filteredAssignments = assignments.filter(assignment => {
-    const matchesSearch = assignment.title.toLowerCase().includes(searchTerm.toLowerCase());
+const filteredAssignments = assignments.filter(assignment => {
+    const matchesSearch = assignment.title_c?.toLowerCase().includes(searchTerm.toLowerCase());
     
     const actualStatus = getAssignmentStatus(assignment);
     const matchesStatus = statusFilter === "all" || actualStatus === statusFilter;
     
-    const matchesCourse = courseFilter === "all" || assignment.courseId === parseInt(courseFilter);
+    const matchesCourse = courseFilter === "all" || assignment.course_id_c?.Id === parseInt(courseFilter);
     
-    const matchesPriority = priorityFilter === "all" || assignment.priority === priorityFilter;
+    const matchesPriority = priorityFilter === "all" || assignment.priority_c === priorityFilter;
     
     return matchesSearch && matchesStatus && matchesCourse && matchesPriority;
   });
 
   const getAssignmentStats = () => {
     const total = assignments.length;
-    const completed = assignments.filter(a => a.status === "completed").length;
+const completed = assignments.filter(a => a.status_c === "completed").length;
     const pending = assignments.filter(a => getAssignmentStatus(a) === "pending").length;
     const overdue = assignments.filter(a => getAssignmentStatus(a) === "overdue").length;
     
@@ -207,9 +207,9 @@ const Assignments = () => {
             className="px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
           >
             <option value="all">All Courses</option>
-            {courses.map(course => (
+{courses.map(course => (
               <option key={course.Id} value={course.Id}>
-                {course.code} - {course.name}
+                {course.code_c} - {course.name_c}
               </option>
             ))}
           </select>

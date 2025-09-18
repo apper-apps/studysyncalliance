@@ -8,13 +8,13 @@ import { format, isAfter, isToday } from "date-fns";
 
 const AssignmentList = ({ assignments, courses, onEdit, onDelete, onToggleStatus }) => {
   const getCourseById = (courseId) => {
-    return courses.find(course => course.Id === courseId);
+return courses.find(course => course.Id === courseId);
   };
 
-  const getStatus = (assignment) => {
-    if (assignment.status === "completed") return "completed";
-    if (isAfter(new Date(), new Date(assignment.dueDate))) return "overdue";
-    if (isToday(new Date(assignment.dueDate))) return "in-progress";
+const getStatus = (assignment) => {
+    if (assignment.status_c === "completed") return "completed";
+    if (isAfter(new Date(), new Date(assignment.due_date_c))) return "overdue";
+    if (isToday(new Date(assignment.due_date_c))) return "in-progress";
     return "pending";
   };
 
@@ -27,7 +27,7 @@ const AssignmentList = ({ assignments, courses, onEdit, onDelete, onToggleStatus
       return statusOrder[aStatus] - statusOrder[bStatus];
     }
     
-    return new Date(a.dueDate) - new Date(b.dueDate);
+return new Date(a.due_date_c) - new Date(b.due_date_c);
   });
 
   if (assignments.length === 0) {
@@ -43,10 +43,9 @@ const AssignmentList = ({ assignments, courses, onEdit, onDelete, onToggleStatus
   return (
     <div className="space-y-4">
       {sortedAssignments.map((assignment) => {
-        const course = getCourseById(assignment.courseId);
+const course = getCourseById(assignment.course_id_c?.Id);
         const status = getStatus(assignment);
-        const isCompleted = assignment.status === "completed";
-        
+        const isCompleted = assignment.status_c === "completed";
         return (
           <Card key={assignment.Id} className="hover:shadow-md transition-shadow">
             <Card.Content className="p-4">
@@ -69,7 +68,7 @@ const AssignmentList = ({ assignments, courses, onEdit, onDelete, onToggleStatus
                     <h3 className={`font-medium text-lg ${
                       isCompleted ? "line-through text-gray-500" : "text-gray-900"
                     }`}>
-                      {assignment.title}
+{assignment.title_c}
                     </h3>
                   </div>
                   
@@ -79,29 +78,29 @@ const AssignmentList = ({ assignments, courses, onEdit, onDelete, onToggleStatus
                         <div className="flex items-center">
                           <div 
                             className="w-3 h-3 rounded-full mr-2"
-                            style={{ backgroundColor: course.color }}
+style={{ backgroundColor: course.color_c }}
                           />
-                          <span className="text-gray-600">{course.name}</span>
+                          <span className="text-gray-600">{course.name_c}</span>
                         </div>
                       )}
                       <div className="flex items-center text-gray-500">
                         <ApperIcon name="Calendar" size={14} className="mr-1" />
-                        {format(new Date(assignment.dueDate), "MMM d, yyyy")}
+{format(new Date(assignment.due_date_c), "MMM d, yyyy")}
                       </div>
                     </div>
                     
                     <div className="flex items-center space-x-3">
                       <StatusBadge status={status} />
-                      <PriorityTag priority={assignment.priority} />
-                      {assignment.grade && (
+<PriorityTag priority={assignment.priority_c} />
+                      {assignment.grade_c && (
                         <div className="text-sm font-medium text-success-600">
-                          Grade: {assignment.grade}%
+                          Grade: {assignment.grade_c}%
                         </div>
                       )}
                     </div>
                     
-                    {assignment.notes && (
-                      <p className="text-sm text-gray-600 mt-2">{assignment.notes}</p>
+{assignment.notes_c && (
+                      <p className="text-sm text-gray-600 mt-2">{assignment.notes_c}</p>
                     )}
                   </div>
                 </div>

@@ -32,12 +32,12 @@ const Calendar = () => {
   const [view, setView] = useState("month"); // month or week
   const [selectedDate, setSelectedDate] = useState(null);
 
-  const getCourseById = (courseId) => {
+const getCourseById = (courseId) => {
     return courses.find(course => course.Id === courseId);
   };
 
-  const getAssignmentsForDate = (date) => {
-    return assignments.filter(assignment => 
+const getAssignmentsForDate = (date) => {
+    return assignments.filter(assignment =>
       isSameDay(new Date(assignment.dueDate), date)
     );
   };
@@ -219,7 +219,7 @@ const Calendar = () => {
                         
                         <div className="space-y-1">
                           {dayAssignments.slice(0, 2).map((assignment) => {
-                            const course = getCourseById(assignment.courseId);
+const course = getCourseById(assignment.course_id_c?.Id);
                             return (
                               <div
                                 key={assignment.Id}
@@ -257,11 +257,11 @@ const Calendar = () => {
               </Card.Header>
               <Card.Content>
                 <div className="space-y-3">
-                  {courses.slice(0, 5).map((course) => (
+{courses.slice(0, 5).map((course) => (
                     <div key={course.Id} className="flex items-center space-x-2">
                       <div 
                         className="w-3 h-3 rounded-full"
-                        style={{ backgroundColor: course.color }}
+                        style={{ backgroundColor: course.color_c }}
                       />
                       <span className="text-sm text-gray-700">{course.code}</span>
                     </div>
@@ -290,28 +290,28 @@ const Calendar = () => {
                   {selectedAssignments.length > 0 ? (
                     <div className="space-y-3">
                       {selectedAssignments.map((assignment) => {
-                        const course = getCourseById(assignment.courseId);
+const course = getCourseById(assignment.course_id_c?.Id);
                         return (
                           <div key={assignment.Id} className="p-3 bg-gray-50 rounded-lg">
                             <h4 className="font-medium text-gray-900 mb-2">
-                              {assignment.title}
+                              {assignment.title_c}
                             </h4>
                             <div className="flex items-center space-x-2 mb-2">
                               {course && (
                                 <div className="flex items-center">
                                   <div 
                                     className="w-2 h-2 rounded-full mr-1"
-                                    style={{ backgroundColor: course.color }}
+                                    style={{ backgroundColor: course.color_c }}
                                   />
-                                  <span className="text-xs text-gray-600">{course.code}</span>
+                                  <span className="text-xs text-gray-600">{course.code_c}</span>
                                 </div>
                               )}
-                              <StatusBadge status={assignment.status} />
-                              <PriorityTag priority={assignment.priority} />
+                              <StatusBadge status={assignment.status_c} />
+                              <PriorityTag priority={assignment.priority_c} />
                             </div>
-                            {assignment.notes && (
+                            {assignment.notes_c && (
                               <p className="text-xs text-gray-600 mt-2">
-                                {assignment.notes}
+                                {assignment.notes_c}
                               </p>
                             )}
                           </div>
@@ -338,8 +338,8 @@ const Calendar = () => {
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-gray-600">Total Due</span>
                     <span className="font-medium">
-                      {assignments.filter(a => 
-                        format(new Date(a.dueDate), "M-yyyy") === format(currentDate, "M-yyyy")
+{assignments.filter(a => 
+                        format(new Date(a.due_date_c), "M-yyyy") === format(currentDate, "M-yyyy")
                       ).length}
                     </span>
                   </div>
@@ -347,8 +347,8 @@ const Calendar = () => {
                     <span className="text-sm text-gray-600">Completed</span>
                     <span className="font-medium text-success-600">
                       {assignments.filter(a => 
-                        format(new Date(a.dueDate), "M-yyyy") === format(currentDate, "M-yyyy") &&
-                        a.status === "completed"
+                        format(new Date(a.due_date_c), "M-yyyy") === format(currentDate, "M-yyyy") &&
+                        a.status_c === "completed"
                       ).length}
                     </span>
                   </div>
@@ -356,8 +356,8 @@ const Calendar = () => {
                     <span className="text-sm text-gray-600">Pending</span>
                     <span className="font-medium text-accent-600">
                       {assignments.filter(a => 
-                        format(new Date(a.dueDate), "M-yyyy") === format(currentDate, "M-yyyy") &&
-                        a.status !== "completed"
+                        format(new Date(a.due_date_c), "M-yyyy") === format(currentDate, "M-yyyy") &&
+                        a.status_c !== "completed"
                       ).length}
                     </span>
                   </div>

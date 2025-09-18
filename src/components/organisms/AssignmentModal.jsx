@@ -6,36 +6,36 @@ import { format } from "date-fns";
 import { toast } from "react-toastify";
 
 const AssignmentModal = ({ isOpen, onClose, onSave, editAssignment = null, courses = [] }) => {
-  const [formData, setFormData] = useState({
-    title: "",
-    courseId: "",
-    dueDate: "",
-    priority: "medium",
-    status: "pending",
-    grade: "",
-    notes: ""
+const [formData, setFormData] = useState({
+    title_c: "",
+    course_id_c: "",
+    due_date_c: "",
+    priority_c: "medium",
+    status_c: "pending",
+    grade_c: "",
+    notes_c: ""
   });
 
   useEffect(() => {
     if (editAssignment) {
-      setFormData({
+setFormData({
         ...editAssignment,
-        dueDate: format(new Date(editAssignment.dueDate), "yyyy-MM-dd"),
-        grade: editAssignment.grade || "",
-        courseId: String(editAssignment.courseId)
+        due_date_c: format(new Date(editAssignment.due_date_c), "yyyy-MM-dd"),
+        grade_c: editAssignment.grade_c || "",
+        course_id_c: String(editAssignment.course_id_c?.Id || "")
       });
     } else {
       const tomorrow = new Date();
       tomorrow.setDate(tomorrow.getDate() + 1);
       
       setFormData({
-        title: "",
-        courseId: courses.length > 0 ? String(courses[0].Id) : "",
-        dueDate: format(tomorrow, "yyyy-MM-dd"),
-        priority: "medium",
-        status: "pending",
-        grade: "",
-        notes: ""
+title_c: "",
+        course_id_c: courses.length > 0 ? String(courses[0].Id) : "",
+        due_date_c: format(tomorrow, "yyyy-MM-dd"),
+        priority_c: "medium",
+        status_c: "pending",
+        grade_c: "",
+        notes_c: ""
       });
     }
   }, [editAssignment, isOpen, courses]);
@@ -49,10 +49,10 @@ const AssignmentModal = ({ isOpen, onClose, onSave, editAssignment = null, cours
     }
 
     const assignmentData = {
-      ...formData,
-      courseId: Number(formData.courseId),
-      grade: formData.grade ? Number(formData.grade) : null,
-      dueDate: new Date(formData.dueDate).toISOString()
+...formData,
+      course_id_c: Number(formData.course_id_c),
+      grade_c: formData.grade_c ? Number(formData.grade_c) : null,
+      due_date_c: new Date(formData.due_date_c).toISOString()
     };
 
     onSave(assignmentData);
@@ -80,7 +80,7 @@ const AssignmentModal = ({ isOpen, onClose, onSave, editAssignment = null, cours
           label="Assignment Title"
           type="text"
           name="title"
-          value={formData.title}
+value={formData.title_c}
           onChange={handleChange}
           placeholder="Midterm Exam"
           required
@@ -89,15 +89,15 @@ const AssignmentModal = ({ isOpen, onClose, onSave, editAssignment = null, cours
         <FormField label="Course" required>
           <select
             name="courseId"
-            value={formData.courseId}
+value={formData.course_id_c}
             onChange={handleChange}
             className="flex h-10 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
             required
           >
             <option value="">Select a course</option>
             {courses.map(course => (
-              <option key={course.Id} value={course.Id}>
-                {course.code} - {course.name}
+<option key={course.Id} value={course.Id}>
+                {course.code_c} - {course.name_c}
               </option>
             ))}
           </select>
@@ -108,7 +108,7 @@ const AssignmentModal = ({ isOpen, onClose, onSave, editAssignment = null, cours
             label="Due Date"
             type="date"
             name="dueDate"
-            value={formData.dueDate}
+value={formData.due_date_c}
             onChange={handleChange}
             required
           />
@@ -116,7 +116,7 @@ const AssignmentModal = ({ isOpen, onClose, onSave, editAssignment = null, cours
           <FormField label="Priority">
             <select
               name="priority"
-              value={formData.priority}
+value={formData.priority_c}
               onChange={handleChange}
               className="flex h-10 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
             >
@@ -131,7 +131,7 @@ const AssignmentModal = ({ isOpen, onClose, onSave, editAssignment = null, cours
           <FormField label="Status">
             <select
               name="status"
-              value={formData.status}
+value={formData.status_c}
               onChange={handleChange}
               className="flex h-10 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
             >
@@ -145,7 +145,7 @@ const AssignmentModal = ({ isOpen, onClose, onSave, editAssignment = null, cours
             label="Grade (%)"
             type="number"
             name="grade"
-            value={formData.grade}
+value={formData.grade_c}
             onChange={handleChange}
             placeholder="85"
             min="0"
@@ -157,7 +157,7 @@ const AssignmentModal = ({ isOpen, onClose, onSave, editAssignment = null, cours
           label="Notes"
           type="textarea"
           name="notes"
-          value={formData.notes}
+value={formData.notes_c}
           onChange={handleChange}
           placeholder="Additional notes about this assignment..."
           rows="3"

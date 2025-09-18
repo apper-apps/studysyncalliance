@@ -1,34 +1,34 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import ApperIcon from "@/components/ApperIcon";
 import Modal from "@/components/atoms/Modal";
 import Button from "@/components/atoms/Button";
-import FormField from "@/components/molecules/FormField";
-import Input from "@/components/atoms/Input";
 import TextArea from "@/components/atoms/TextArea";
+import Input from "@/components/atoms/Input";
 import Select from "@/components/atoms/Select";
-import ApperIcon from "@/components/ApperIcon";
-import { toast } from "react-toastify";
+import FormField from "@/components/molecules/FormField";
 
 const StudentModal = ({ isOpen, onClose, onSave, editStudent = null }) => {
-  const [formData, setFormData] = useState({
-    studentName: "",
-    address: "",
-    cgpa: 0.00,
-    gradeLevel: "Freshman",
-    subjectsEnrolled: [],
-    attendancePercentage: 0,
-    dateOfBirth: "",
-    completedCredits: 0,
-    isEnrolled: true,
-    studentEmail: "",
-    lastLogin: "",
-    studentInterests: [],
-    assignedCounselor: "",
-    scholarshipAmount: { amount: 0, currency: "USD" },
-    parentalConsentReceived: false,
-    enrollmentStatus: "Active",
-    emergencyContact: "",
-    studentPortfolioWebsite: "",
-    studentSatisfactionRating: 5
+const [formData, setFormData] = useState({
+    student_name_c: "",
+    address_c: "",
+    cgpa_c: 0.00,
+    grade_level_c: "Freshman",
+    subjects_enrolled_c: [],
+    attendance_percentage_c: 0,
+    date_of_birth_c: "",
+    completed_credits_c: 0,
+    is_enrolled_c: true,
+    student_email_c: "",
+    last_login_c: "",
+    student_interests_c: [],
+    assigned_counselor_c: "",
+    scholarship_amount_c: 0,
+    parental_consent_received_c: false,
+    enrollment_status_c: "Active",
+    emergency_contact_c: "",
+    student_portfolio_website_c: "",
+    student_satisfaction_rating_c: 5
   });
 
   const [tempInterest, setTempInterest] = useState("");
@@ -36,36 +36,35 @@ const StudentModal = ({ isOpen, onClose, onSave, editStudent = null }) => {
 
   useEffect(() => {
     if (editStudent) {
-      setFormData({
+setFormData({
         ...editStudent,
-        dateOfBirth: editStudent.dateOfBirth ? editStudent.dateOfBirth.split('T')[0] : "",
-        lastLogin: editStudent.lastLogin ? 
-          new Date(editStudent.lastLogin).toISOString().slice(0, 16) : "",
-        subjectsEnrolled: editStudent.subjectsEnrolled || [],
-        studentInterests: editStudent.studentInterests || [],
-        scholarshipAmount: editStudent.scholarshipAmount || { amount: 0, currency: "USD" }
+        date_of_birth_c: editStudent.date_of_birth_c ? editStudent.date_of_birth_c.split('T')[0] : "",
+        last_login_c: editStudent.last_login_c ? 
+          new Date(editStudent.last_login_c).toISOString().slice(0, 16) : "",
+        subjects_enrolled_c: editStudent.subjects_enrolled_c || [],
+        student_interests_c: editStudent.student_interests_c || []
       });
     } else {
-      setFormData({
-        studentName: "",
-        address: "",
-        cgpa: 0.00,
-        gradeLevel: "Freshman",
-        subjectsEnrolled: [],
-        attendancePercentage: 0,
-        dateOfBirth: "",
-        completedCredits: 0,
-        isEnrolled: true,
-        studentEmail: "",
-        lastLogin: "",
-        studentInterests: [],
-        assignedCounselor: "",
-        scholarshipAmount: { amount: 0, currency: "USD" },
-        parentalConsentReceived: false,
-        enrollmentStatus: "Active",
-        emergencyContact: "",
-        studentPortfolioWebsite: "",
-        studentSatisfactionRating: 5
+setFormData({
+        student_name_c: "",
+        address_c: "",
+        cgpa_c: 0.00,
+        grade_level_c: "Freshman",
+        subjects_enrolled_c: [],
+        attendance_percentage_c: 0,
+        date_of_birth_c: "",
+        completed_credits_c: 0,
+        is_enrolled_c: true,
+        student_email_c: "",
+        last_login_c: "",
+        student_interests_c: [],
+        assigned_counselor_c: "",
+        scholarship_amount_c: 0,
+        parental_consent_received_c: false,
+        enrollment_status_c: "Active",
+        emergency_contact_c: "",
+        student_portfolio_website_c: "",
+        student_satisfaction_rating_c: 5
       });
     }
     setErrors({});
@@ -74,29 +73,29 @@ const StudentModal = ({ isOpen, onClose, onSave, editStudent = null }) => {
   const validateForm = () => {
     const newErrors = {};
     
-    if (!formData.studentName?.trim()) {
-      newErrors.studentName = "Student name is required";
+if (!formData.student_name_c?.trim()) {
+      newErrors.student_name_c = "Student name is required";
     }
     
-    if (formData.studentEmail && !/\S+@\S+\.\S+/.test(formData.studentEmail)) {
-      newErrors.studentEmail = "Invalid email format";
+    if (formData.student_email_c && !/\S+@\S+\.\S+/.test(formData.student_email_c)) {
+      newErrors.student_email_c = "Invalid email format";
     }
     
-    if (formData.cgpa < 0 || formData.cgpa > 4) {
-      newErrors.cgpa = "CGPA must be between 0.00 and 4.00";
+    if (formData.cgpa_c < 0 || formData.cgpa_c > 4) {
+      newErrors.cgpa_c = "CGPA must be between 0.00 and 4.00";
     }
     
-    if (formData.attendancePercentage < 0 || formData.attendancePercentage > 100) {
-      newErrors.attendancePercentage = "Attendance must be between 0 and 100";
+    if (formData.attendance_percentage_c < 0 || formData.attendance_percentage_c > 100) {
+      newErrors.attendance_percentage_c = "Attendance must be between 0 and 100";
     }
     
-    if (formData.completedCredits < 0) {
-      newErrors.completedCredits = "Credits cannot be negative";
+    if (formData.completed_credits_c < 0) {
+      newErrors.completed_credits_c = "Credits cannot be negative";
     }
 
-    if (formData.studentPortfolioWebsite && 
-        !/^https?:\/\/.*\..+/.test(formData.studentPortfolioWebsite)) {
-      newErrors.studentPortfolioWebsite = "Invalid website URL format";
+    if (formData.student_portfolio_website_c && 
+        !/^https?:\/\/.*\..+/.test(formData.student_portfolio_website_c)) {
+      newErrors.student_portfolio_website_c = "Invalid website URL format";
     }
 
     setErrors(newErrors);
@@ -113,13 +112,10 @@ const StudentModal = ({ isOpen, onClose, onSave, editStudent = null }) => {
 
     const studentData = {
       ...formData,
-      cgpa: parseFloat(formData.cgpa),
-      completedCredits: parseInt(formData.completedCredits),
-      attendancePercentage: parseInt(formData.attendancePercentage),
-      scholarshipAmount: {
-        ...formData.scholarshipAmount,
-        amount: parseFloat(formData.scholarshipAmount.amount)
-      }
+cgpa_c: parseFloat(formData.cgpa_c),
+      completed_credits_c: parseInt(formData.completed_credits_c),
+      attendance_percentage_c: parseInt(formData.attendance_percentage_c),
+      scholarship_amount_c: parseFloat(formData.scholarship_amount_c)
     };
 
     onSave(studentData);
@@ -157,19 +153,19 @@ const StudentModal = ({ isOpen, onClose, onSave, editStudent = null }) => {
   };
 
   const handleAddInterest = () => {
-    if (tempInterest.trim() && !formData.studentInterests.includes(tempInterest.trim())) {
+if (tempInterest.trim() && !formData.student_interests_c.includes(tempInterest.trim())) {
       setFormData(prev => ({
         ...prev,
-        studentInterests: [...prev.studentInterests, tempInterest.trim()]
+        student_interests_c: [...prev.student_interests_c, tempInterest.trim()]
       }));
       setTempInterest("");
     }
   };
 
   const handleRemoveInterest = (interest) => {
-    setFormData(prev => ({
+setFormData(prev => ({
       ...prev,
-      studentInterests: prev.studentInterests.filter(i => i !== interest)
+      student_interests_c: prev.student_interests_c.filter(i => i !== interest)
     }));
   };
 
@@ -181,17 +177,17 @@ const StudentModal = ({ isOpen, onClose, onSave, editStudent = null }) => {
             key={star}
             type="button"
             onClick={() => setFormData(prev => ({ ...prev, studentSatisfactionRating: star }))}
-            className={`p-1 rounded transition-colors ${
-              star <= formData.studentSatisfactionRating 
+className={`p-1 rounded transition-colors ${
+              star <= formData.student_satisfaction_rating_c 
                 ? "text-yellow-400 hover:text-yellow-500" 
                 : "text-gray-300 hover:text-gray-400"
             }`}
           >
-            <ApperIcon name="Star" size={20} className={star <= formData.studentSatisfactionRating ? "fill-current" : ""} />
+            <ApperIcon name="Star" size={20} className={star <= formData.student_satisfaction_rating_c ? "fill-current" : ""} />
           </button>
         ))}
         <span className="ml-2 text-sm text-gray-600">
-          ({formData.studentSatisfactionRating}/5)
+          ({formData.student_satisfaction_rating_c}/5)
         </span>
       </div>
     );
@@ -217,19 +213,19 @@ const StudentModal = ({ isOpen, onClose, onSave, editStudent = null }) => {
             <FormField
               label="Student Name"
               type="text"
-              name="studentName"
-              value={formData.studentName}
+name="student_name_c"
+              value={formData.student_name_c}
               onChange={handleChange}
               placeholder="Enter full name"
-              error={errors.studentName}
+              error={errors.student_name_c}
               required
             />
 
             <FormField
               label="Address"
               type="textarea"
-              name="address"
-              value={formData.address}
+name="address_c"
+              value={formData.address_c}
               onChange={handleChange}
               placeholder="Enter complete address"
               rows={3}
@@ -239,8 +235,8 @@ const StudentModal = ({ isOpen, onClose, onSave, editStudent = null }) => {
               <FormField
                 label="Date of Birth"
                 type="date"
-                name="dateOfBirth"
-                value={formData.dateOfBirth}
+name="date_of_birth_c"
+                value={formData.date_of_birth_c}
                 onChange={handleChange}
               />
               
@@ -249,9 +245,9 @@ const StudentModal = ({ isOpen, onClose, onSave, editStudent = null }) => {
                 type="email"
                 name="studentEmail"
                 value={formData.studentEmail}
-                onChange={handleChange}
+onChange={handleChange}
                 placeholder="student@example.com"
-                error={errors.studentEmail}
+                error={errors.student_email_c}
               />
             </div>
 
@@ -259,7 +255,7 @@ const StudentModal = ({ isOpen, onClose, onSave, editStudent = null }) => {
               label="Emergency Contact"
               type="tel"
               name="emergencyContact"
-              value={formData.emergencyContact}
+value={formData.emergency_contact_c}
               onChange={handleChange}
               placeholder="+1-202-555-0199"
             />
@@ -274,7 +270,7 @@ const StudentModal = ({ isOpen, onClose, onSave, editStudent = null }) => {
                 <Select
                   name="gradeLevel"
                   value={formData.gradeLevel}
-                  onChange={handleChange}
+onChange={handleChange}
                 >
                   <option value="Freshman">Freshman</option>
                   <option value="Sophomore">Sophomore</option>
@@ -284,10 +280,10 @@ const StudentModal = ({ isOpen, onClose, onSave, editStudent = null }) => {
               </FormField>
               
               <FormField
-                label="CGPA"
+label="CGPA"
                 type="number"
-                name="cgpa"
-                value={formData.cgpa}
+                name="cgpa_c"
+                value={formData.cgpa_c}
                 onChange={handleChange}
                 placeholder="0.00"
                 step="0.01"
@@ -301,20 +297,20 @@ const StudentModal = ({ isOpen, onClose, onSave, editStudent = null }) => {
               <FormField
                 label="Completed Credits"
                 type="number"
-                name="completedCredits"
-                value={formData.completedCredits}
+name="completed_credits_c"
+                value={formData.completed_credits_c}
                 onChange={handleChange}
                 placeholder="Enter credit count"
                 min="0"
-                error={errors.completedCredits}
+                error={errors.completed_credits_c}
               />
               
               <FormField label="Attendance Percentage">
                 <div className="space-y-2">
                   <input
                     type="range"
-                    name="attendancePercentage"
-                    value={formData.attendancePercentage}
+name="attendance_percentage_c"
+                    value={formData.attendance_percentage_c}
                     onChange={handleChange}
                     min="0"
                     max="100"
@@ -335,7 +331,7 @@ const StudentModal = ({ isOpen, onClose, onSave, editStudent = null }) => {
             <FormField label="Subjects Enrolled">
               <div className="grid grid-cols-2 gap-2">
                 {subjectOptions.map((subject) => (
-                  <label key={subject} className="flex items-center space-x-2">
+<label key={subject} className="flex items-center space-x-2">
                     <input
                       type="checkbox"
                       checked={formData.subjectsEnrolled.includes(subject)}
@@ -351,7 +347,7 @@ const StudentModal = ({ isOpen, onClose, onSave, editStudent = null }) => {
             <FormField label="Assigned Counselor">
               <Select
                 name="assignedCounselor"
-                value={formData.assignedCounselor}
+value={formData.assigned_counselor_c}
                 onChange={handleChange}
               >
                 <option value="">Select from staff list</option>
@@ -375,7 +371,7 @@ const StudentModal = ({ isOpen, onClose, onSave, editStudent = null }) => {
                         type="radio"
                         name="enrollmentStatus"
                         value={status}
-                        checked={formData.enrollmentStatus === status}
+checked={formData.enrollment_status_c === status}
                         onChange={handleChange}
                         className="w-4 h-4 text-primary-600 focus:ring-primary-500"
                       />
@@ -392,7 +388,7 @@ const StudentModal = ({ isOpen, onClose, onSave, editStudent = null }) => {
                       <input
                         type="checkbox"
                         name="isEnrolled"
-                        checked={formData.isEnrolled}
+checked={formData.is_enrolled_c}
                         onChange={handleChange}
                         className="w-4 h-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
                       />
@@ -407,7 +403,7 @@ const StudentModal = ({ isOpen, onClose, onSave, editStudent = null }) => {
                       <input
                         type="checkbox"
                         name="parentalConsentReceived"
-                        checked={formData.parentalConsentReceived}
+checked={formData.parental_consent_received_c}
                         onChange={handleChange}
                         className="w-4 h-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
                       />
@@ -420,9 +416,9 @@ const StudentModal = ({ isOpen, onClose, onSave, editStudent = null }) => {
 
             <FormField label="Last Login">
               <Input
-                type="datetime-local"
-                name="lastLogin"
-                value={formData.lastLogin}
+type="datetime-local"
+                name="last_login_c"
+                value={formData.last_login_c}
                 onChange={handleChange}
               />
             </FormField>
@@ -460,7 +456,7 @@ const StudentModal = ({ isOpen, onClose, onSave, editStudent = null }) => {
                       className={`px-3 py-1 rounded-full text-sm border transition-colors ${
                         formData.studentInterests.includes(interest)
                           ? "bg-primary-500 text-white border-primary-500"
-                          : "bg-white text-gray-700 border-gray-300 hover:border-primary-500"
+: "bg-white text-gray-700 border-gray-300 hover:border-primary-500"
                       }`}
                     >
                       {interest}
@@ -469,7 +465,7 @@ const StudentModal = ({ isOpen, onClose, onSave, editStudent = null }) => {
                 </div>
                 {formData.studentInterests.length > 0 && (
                   <div className="flex flex-wrap gap-2">
-                    {formData.studentInterests.map((interest, index) => (
+{formData.student_interests_c.map((interest, index) => (
                       <div
                         key={index}
                         className="flex items-center space-x-1 bg-primary-100 text-primary-800 px-2 py-1 rounded-full text-sm"
@@ -489,28 +485,30 @@ const StudentModal = ({ isOpen, onClose, onSave, editStudent = null }) => {
               </div>
             </FormField>
 
-            <FormField label="Scholarship Amount">
+<FormField label="Scholarship Amount">
               <div className="grid grid-cols-3 gap-2">
                 <div className="col-span-2">
                   <Input
                     type="number"
-                    name="scholarshipAmount.amount"
-                    value={formData.scholarshipAmount.amount}
+                    name="scholarship_amount_c"
+                    value={formData.scholarship_amount_c}
                     onChange={handleChange}
                     placeholder="0"
                     min="0"
                     step="0.01"
                   />
                 </div>
-                <Select
-                  name="scholarshipAmount.currency"
-                  value={formData.scholarshipAmount.currency}
-                  onChange={handleChange}
-                >
-                  <option value="USD">USD ($)</option>
-                  <option value="EUR">EUR (€)</option>
-                  <option value="INR">INR (₹)</option>
-                </Select>
+                <div>
+                  <Select
+                    name="currency"
+                    value={formData.currency || "USD"}
+                    onChange={handleChange}
+                  >
+                    <option value="USD">USD ($)</option>
+                    <option value="EUR">EUR (€)</option>
+                    <option value="INR">INR (₹)</option>
+                  </Select>
+                </div>
               </div>
             </FormField>
 
@@ -518,10 +516,10 @@ const StudentModal = ({ isOpen, onClose, onSave, editStudent = null }) => {
               label="Portfolio Website"
               type="url"
               name="studentPortfolioWebsite"
-              value={formData.studentPortfolioWebsite}
+value={formData.student_portfolio_website_c}
               onChange={handleChange}
               placeholder="https://portfolio.example.com"
-              error={errors.studentPortfolioWebsite}
+              error={errors.student_portfolio_website_c}
             />
 
             <FormField label="Satisfaction Rating">
