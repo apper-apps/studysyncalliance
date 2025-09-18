@@ -99,8 +99,8 @@ const FacultyModal = ({ isOpen, onClose, onSave, editFaculty = null }) => {
       newErrors.facultyWebsite = "Invalid website URL format";
     }
 
-    if (formData.contactPhone && 
-        !/^\+?[\d\s\-\(\)]{10,}$/.test(formData.contactPhone)) {
+if (formData.contactPhone && 
+        !/^\+?[\d\s\-()]{10,}$/.test(formData.contactPhone)) {
       newErrors.contactPhone = "Invalid phone number format";
     }
 
