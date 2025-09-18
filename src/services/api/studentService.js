@@ -1,6 +1,4 @@
-import { toast } from "react-toastify";
-import React from "react";
-
+import { toast } from 'react-toastify';
 export const studentService = {
   async getAll() {
     try {
@@ -340,8 +338,7 @@ export const studentService = {
       return [];
     }
   },
-
-  async getByEnrollmentStatus(status) {
+async getByEnrollmentStatus(status) {
     try {
       const { ApperClient } = window.ApperSDK;
       const apperClient = new ApperClient({
@@ -377,7 +374,7 @@ export const studentService = {
     }
   },
 
-  async updateAttendance(id, attendance) {
+async updateAttendance(id, attendance) {
     try {
       const { ApperClient } = window.ApperSDK;
       const apperClient = new ApperClient({
@@ -420,5 +417,5 @@ export const studentService = {
       }
       return null;
     }
-    }
   }
+};

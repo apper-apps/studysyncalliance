@@ -21,7 +21,7 @@ const Courses = () => {
   const [selectedSemester, setSelectedSemester] = useState("all");
 
 const getUpcomingAssignmentsCount = (courseId) => {
-    return assignments.filter(assignment => 
+return assignments.filter(assignment => 
       assignment.course_id_c?.Id === courseId && 
       new Date(assignment.due_date_c) > new Date() && 
       assignment.status_c !== "completed"
@@ -31,7 +31,7 @@ const getUpcomingAssignmentsCount = (courseId) => {
   const handleSaveCourse = async (courseData) => {
     try {
       if (editingCourse) {
-        await updateCourse(editingCourse.Id, courseData);
+await updateCourse(editingCourse.Id, courseData);
         toast.success("Course updated successfully!");
       } else {
         await addCourse(courseData);
@@ -64,7 +64,7 @@ const getUpcomingAssignmentsCount = (courseId) => {
   };
 
 const filteredCourses = courses.filter(course => {
-    const matchesSearch = course.name_c?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+const matchesSearch = course.name_c?.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          course.code_c?.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          course.instructor_c?.toLowerCase().includes(searchTerm.toLowerCase());
     
@@ -144,7 +144,7 @@ const filteredCourses = courses.filter(course => {
             <div>
               <p className="text-accent-100 text-sm">Total Credits</p>
 <p className="text-2xl font-bold">
-                {courses.reduce((sum, course) => sum + (course.credits_c || 0), 0)}
+{courses.reduce((sum, course) => sum + (course.credits_c || 0), 0)}
               </p>
             </div>
             <ApperIcon name="Award" size={20} />
@@ -156,7 +156,7 @@ const filteredCourses = courses.filter(course => {
             <div>
               <p className="text-green-100 text-sm">Avg Grade</p>
               <p className="text-2xl font-bold">
-{courses.length > 0 
+                {courses.length > 0 
                   ? Math.round(courses.reduce((sum, course) => sum + (course.current_grade_c || 0), 0) / courses.length)
                   : 0}%
               </p>
@@ -190,7 +190,7 @@ const filteredCourses = courses.filter(course => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredCourses.map((course) => (
-            <div key={course.Id} className="group relative">
+<div key={course.Id} className="group relative">
               <CourseCard
                 course={course}
                 upcomingCount={getUpcomingAssignmentsCount(course.Id)}
@@ -216,7 +216,7 @@ const filteredCourses = courses.filter(course => {
                     variant="ghost"
                     onClick={(e) => {
                       e.stopPropagation();
-                      handleDeleteCourse(course.Id);
+handleDeleteCourse(course.Id);
                     }}
                     className="bg-white/90 hover:bg-white shadow-sm text-error-600 hover:text-error-700"
                   >

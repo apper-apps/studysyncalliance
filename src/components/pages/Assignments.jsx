@@ -35,7 +35,7 @@ const Assignments = () => {
   const handleSaveAssignment = async (assignmentData) => {
     try {
       if (editingAssignment) {
-        await updateAssignment(editingAssignment.Id, assignmentData);
+await updateAssignment(editingAssignment.Id, assignmentData);
         toast.success("Assignment updated successfully!");
       } else {
         await addAssignment(assignmentData);
@@ -52,7 +52,7 @@ const Assignments = () => {
   };
 
   const handleDeleteAssignment = async (assignmentId) => {
-    if (window.confirm("Are you sure you want to delete this assignment?")) {
+if (window.confirm("Are you sure you want to delete this assignment?")) {
       try {
         await deleteAssignment(assignmentId);
         toast.success("Assignment deleted successfully!");
@@ -62,7 +62,7 @@ const Assignments = () => {
     }
   };
 
-  const handleToggleStatus = async (assignmentId, newStatus) => {
+const handleToggleStatus = async (assignmentId, newStatus) => {
     try {
       await updateAssignmentStatus(assignmentId, newStatus);
       toast.success(`Assignment marked as ${newStatus}!`);
@@ -77,14 +77,14 @@ const Assignments = () => {
   };
 
 const getAssignmentStatus = (assignment) => {
-    if (assignment.status_c === "completed") return "completed";
+if (assignment.status_c === "completed") return "completed";
     if (isAfter(new Date(), new Date(assignment.due_date_c))) return "overdue";
     if (isToday(new Date(assignment.due_date_c))) return "in-progress";
     return "pending";
   };
 
 const filteredAssignments = assignments.filter(assignment => {
-    const matchesSearch = assignment.title_c?.toLowerCase().includes(searchTerm.toLowerCase());
+const matchesSearch = assignment.title_c?.toLowerCase().includes(searchTerm.toLowerCase());
     
     const actualStatus = getAssignmentStatus(assignment);
     const matchesStatus = statusFilter === "all" || actualStatus === statusFilter;

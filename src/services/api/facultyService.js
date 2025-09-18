@@ -1,5 +1,5 @@
-import { toast } from 'react-toastify';
-
+import { toast } from "react-toastify";
+import React from "react";
 export const facultyService = {
   async getAll() {
     try {
@@ -375,8 +375,7 @@ export const facultyService = {
       return [];
     }
   },
-
-  async updateSalary(id, salary) {
+async updateSalary(id, salary) {
     try {
       const { ApperClient } = window.ApperSDK;
       const apperClient = new ApperClient({
@@ -418,6 +417,6 @@ export const facultyService = {
         toast.error("Failed to update faculty salary");
       }
       return null;
-    }
+}
   }
 };

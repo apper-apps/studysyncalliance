@@ -1,15 +1,16 @@
 import React, { useState } from "react";
-import Button from "@/components/atoms/Button";
-import SearchBar from "@/components/molecules/SearchBar";
-import StudentModal from "@/components/organisms/StudentModal";
-import Loading from "@/components/ui/Loading";
-import Error from "@/components/ui/Error";
-import Empty from "@/components/ui/Empty";
-import Card from "@/components/atoms/Card";
-import Badge from "@/components/atoms/Badge";
-import ApperIcon from "@/components/ApperIcon";
 import { useStudents } from "@/hooks/useStudents";
 import { toast } from "react-toastify";
+import ApperIcon from "@/components/ApperIcon";
+import Card from "@/components/atoms/Card";
+import Button from "@/components/atoms/Button";
+import Badge from "@/components/atoms/Badge";
+import StudentModal from "@/components/organisms/StudentModal";
+import Grades from "@/components/pages/Grades";
+import Loading from "@/components/ui/Loading";
+import Empty from "@/components/ui/Empty";
+import Error from "@/components/ui/Error";
+import SearchBar from "@/components/molecules/SearchBar";
 
 const Students = () => {
   const { students, loading, error, addStudent, updateStudent, deleteStudent, loadStudents } = useStudents();
@@ -24,7 +25,7 @@ const Students = () => {
   const handleSaveStudent = async (studentData) => {
     try {
       if (editingStudent) {
-        await updateStudent(editingStudent.Id, studentData);
+await updateStudent(editingStudent.Id, studentData);
         toast.success("Student updated successfully!");
       } else {
         await addStudent(studentData);
@@ -41,7 +42,7 @@ const Students = () => {
   };
 
   const handleDeleteStudent = async (studentId) => {
-    if (window.confirm("Are you sure you want to delete this student? This action cannot be undone.")) {
+if (window.confirm("Are you sure you want to delete this student? This action cannot be undone.")) {
       try {
         await deleteStudent(studentId);
         toast.success("Student deleted successfully!");
@@ -96,10 +97,10 @@ const Students = () => {
     );
   };
 
-  const filteredAndSortedStudents = students
+const filteredAndSortedStudents = students
     .filter(student => {
       const matchesSearch = 
-student.student_name_c?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        student.student_name_c?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         student.student_email_c?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         student.assigned_counselor_c?.toLowerCase().includes(searchTerm.toLowerCase());
       
@@ -110,8 +111,8 @@ student.student_name_c?.toLowerCase().includes(searchTerm.toLowerCase()) ||
     })
     .sort((a, b) => {
       switch (sortBy) {
-        case "name":
-return (a.student_name_c || "").localeCompare(b.student_name_c || "");
+case "name":
+          return (a.student_name_c || "").localeCompare(b.student_name_c || "");
         case "cgpa":
           return (b.cgpa_c || 0) - (a.cgpa_c || 0);
         case "credits":
@@ -272,13 +273,13 @@ active: students.filter(s => s.enrollment_status_c === "Active").length,
                     </div>
                     <div>
                       <h3 className="font-semibold text-gray-900 text-lg leading-tight">
-                        {student.student_name_c || "Unnamed Student"}
+{student.student_name_c || "Unnamed Student"}
                       </h3>
                       <p className="text-gray-500 text-sm">{student.studentEmail || "No email"}</p>
                     </div>
                   </div>
-                  <Badge variant={getStatusBadge(student.enrollmentStatus)}>
-                    {student.enrollmentStatus || "Unknown"}
+<Badge variant={getStatusBadge(student.enrollment_status_c)}>
+                    {student.enrollment_status_c || "Unknown"}
                   </Badge>
                 </div>
 
@@ -293,21 +294,21 @@ active: students.filter(s => s.enrollment_status_c === "Active").length,
                   
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-gray-600">CGPA:</span>
-                    <span className="font-semibold text-gray-900">
+<span className="font-semibold text-gray-900">
                       {student.cgpa_c?.toFixed(2) || "0.00"}
                     </span>
                   </div>
                   
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-gray-600">Credits:</span>
-                    <span className="font-semibold text-gray-900">
+<span className="font-semibold text-gray-900">
                       {student.completed_credits_c || 0}
                     </span>
                   </div>
                   
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-gray-600">Attendance:</span>
-                    <div className="flex items-center space-x-2">
+<div className="flex items-center space-x-2">
                       <div className="w-16 bg-gray-200 rounded-full h-2">
                         <div 
                           className="bg-gradient-to-r from-success-500 to-success-600 h-2 rounded-full transition-all duration-300"
@@ -384,7 +385,7 @@ active: students.filter(s => s.enrollment_status_c === "Active").length,
                 </div>
               </div>
             </Card>
-          ))}
+))}
         </div>
       )}
 
