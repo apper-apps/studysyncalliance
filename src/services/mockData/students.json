@@ -1,0 +1,77 @@
+[
+  {
+    "Id": 1,
+    "studentName": "Alice Johnson",
+    "address": "123 Main Street\nSpringfield, IL 62701\nUnited States",
+    "cgpa": 3.85,
+    "gradeLevel": "Senior",
+    "subjectsEnrolled": ["Math", "Science", "Computer Science"],
+    "attendancePercentage": 92,
+    "dateOfBirth": "2001-03-15T00:00:00.000Z",
+    "completedCredits": 110,
+    "isEnrolled": true,
+    "studentEmail": "alice.johnson@university.edu",
+    "lastLogin": "2024-01-15T14:30:00.000Z",
+    "studentInterests": ["Robotics", "Coding", "Music"],
+    "assignedCounselor": "Dr. Smith",
+    "scholarshipAmount": {
+      "amount": 5000,
+      "currency": "USD"
+    },
+    "parentalConsentReceived": true,
+    "enrollmentStatus": "Active",
+    "emergencyContact": "+1-555-0123",
+    "studentPortfolioWebsite": "https://alice-portfolio.com",
+    "studentSatisfactionRating": 5
+  },
+  {
+    "Id": 2,
+    "studentName": "Marcus Thompson",
+    "address": "456 Oak Avenue\nApartment 2B\nChicago, IL 60601\nUnited States",
+    "cgpa": 3.42,
+    "gradeLevel": "Junior",
+    "subjectsEnrolled": ["History", "Literature", "Math"],
+    "attendancePercentage": 88,
+    "dateOfBirth": "2002-07-22T00:00:00.000Z",
+    "completedCredits": 78,
+    "isEnrolled": true,
+    "studentEmail": "marcus.t@university.edu",
+    "lastLogin": "2024-01-14T09:15:00.000Z",
+    "studentInterests": ["Debate", "Sports"],
+    "assignedCounselor": "Prof. Johnson",
+    "scholarshipAmount": {
+      "amount": 2500,
+      "currency": "USD"
+    },
+    "parentalConsentReceived": true,
+    "enrollmentStatus": "Active",
+    "emergencyContact": "+1-555-0198",
+    "studentPortfolioWebsite": "https://marcus-blog.com",
+    "studentSatisfactionRating": 4
+  },
+  {
+    "Id": 3,
+    "studentName": "Sofia Rodriguez",
+    "address": "789 Pine Street\nUnit 15\nAustin, TX 73301\nUnited States",
+    "cgpa": 3.95,
+    "gradeLevel": "Sophomore",
+    "subjectsEnrolled": ["Science", "Math", "Computer Science", "Literature"],
+    "attendancePercentage": 96,
+    "dateOfBirth": "2003-11-08T00:00:00.000Z",
+    "completedCredits": 45,
+    "isEnrolled": true,
+    "studentEmail": "sofia.rodriguez@university.edu",
+    "lastLogin": "2024-01-16T16:45:00.000Z",
+    "studentInterests": ["Music", "Coding", "Robotics", "Debate"],
+    "assignedCounselor": "Ms. Williams",
+    "scholarshipAmount": {
+      "amount": 7500,
+      "currency": "USD"
+    },
+    "parentalConsentReceived": true,
+    "enrollmentStatus": "Active",
+    "emergencyContact": "+1-555-0177",
+    "studentPortfolioWebsite": "https://sofia-dev.github.io",
+    "studentSatisfactionRating": 5
+  }
+]

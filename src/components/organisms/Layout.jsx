@@ -7,12 +7,13 @@ import { cn } from "@/utils/cn";
 const Layout = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const navigation = [
+const navigation = [
     { name: "Dashboard", href: "/", icon: "LayoutDashboard" },
     { name: "Courses", href: "/courses", icon: "BookOpen" },
     { name: "Assignments", href: "/assignments", icon: "FileText" },
     { name: "Grades", href: "/grades", icon: "TrendingUp" },
-    { name: "Calendar", href: "/calendar", icon: "Calendar" }
+    { name: "Calendar", href: "/calendar", icon: "Calendar" },
+    { name: "Students", href: "/students", icon: "Users" }
   ];
 
   const NavItem = ({ item, mobile = false }) => (

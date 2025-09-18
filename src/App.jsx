@@ -7,18 +7,19 @@ import Courses from "@/components/pages/Courses";
 import Assignments from "@/components/pages/Assignments";
 import Grades from "@/components/pages/Grades";
 import Calendar from "@/components/pages/Calendar";
-
+import Students from "@/components/pages/Students";
 const App = () => {
   return (
     <BrowserRouter>
       <div className="min-h-screen bg-gray-50">
         <Routes>
-          <Route path="/" element={<Layout />}>
+<Route path="/" element={<Layout />}>
             <Route index element={<Dashboard />} />
             <Route path="courses" element={<Courses />} />
             <Route path="assignments" element={<Assignments />} />
             <Route path="grades" element={<Grades />} />
             <Route path="calendar" element={<Calendar />} />
+            <Route path="students" element={<Students />} />
           </Route>
         </Routes>
         

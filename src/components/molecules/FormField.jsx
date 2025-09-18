@@ -14,7 +14,7 @@ const FormField = ({
   children,
   ...props 
 }) => {
-  const renderInput = () => {
+const renderInput = () => {
     if (children) return children;
     
     switch (type) {
@@ -22,6 +22,16 @@ const FormField = ({
         return <Select error={error} {...props} />;
       case "textarea":
         return <TextArea error={error} {...props} />;
+      case "range":
+      case "rating":
+      case "tags":
+      case "currency":
+      case "checkbox":
+      case "radio":
+      case "phone":
+      case "website":
+      case "datetime-local":
+        return children;
       default:
         return <Input type={type} error={error} {...props} />;
     }
