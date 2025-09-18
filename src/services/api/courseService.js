@@ -255,11 +255,11 @@ async delete(id) {
         console.error(error);
         toast.error("Failed to delete course");
       }
-      return false;
-    }
 return false;
     }
   },
+
+  async updateGrade(id, grade) {
     try {
       const { ApperClient } = window.ApperSDK;
       const apperClient = new ApperClient({
