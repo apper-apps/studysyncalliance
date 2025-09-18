@@ -420,6 +420,5 @@ export const studentService = {
       }
       return null;
     }
-return null;
     }
   }
