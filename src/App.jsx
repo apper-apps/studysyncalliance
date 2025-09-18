@@ -8,6 +8,7 @@ import Assignments from "@/components/pages/Assignments";
 import Grades from "@/components/pages/Grades";
 import Calendar from "@/components/pages/Calendar";
 import Students from "@/components/pages/Students";
+import Faculty from "@/components/pages/Faculty";
 const App = () => {
   return (
     <BrowserRouter>
@@ -19,7 +20,8 @@ const App = () => {
             <Route path="assignments" element={<Assignments />} />
             <Route path="grades" element={<Grades />} />
             <Route path="calendar" element={<Calendar />} />
-            <Route path="students" element={<Students />} />
+<Route path="students" element={<Students />} />
+            <Route path="faculty" element={<Faculty />} />
           </Route>
         </Routes>
         

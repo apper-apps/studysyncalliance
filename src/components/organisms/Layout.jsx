@@ -13,7 +13,8 @@ const navigation = [
     { name: "Assignments", href: "/assignments", icon: "FileText" },
     { name: "Grades", href: "/grades", icon: "TrendingUp" },
     { name: "Calendar", href: "/calendar", icon: "Calendar" },
-    { name: "Students", href: "/students", icon: "Users" }
+    { name: "Students", href: "/students", icon: "Users" },
+    { name: "Faculty", href: "/faculty", icon: "GraduationCap" }
   ];
 
   const NavItem = ({ item, mobile = false }) => (
