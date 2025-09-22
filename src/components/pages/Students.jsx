@@ -99,6 +99,9 @@ if (window.confirm("Are you sure you want to delete this student? This action ca
 
 const filteredAndSortedStudents = students
     .filter(student => {
+      // Add null safety check for student object
+      if (!student) return false;
+      
       const matchesSearch = 
         student.student_name_c?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         student.student_email_c?.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -110,8 +113,11 @@ const filteredAndSortedStudents = students
       return matchesSearch && matchesGrade && matchesStatus;
     })
     .sort((a, b) => {
+      // Add null safety checks for sorting
+      if (!a || !b) return 0;
+      
       switch (sortBy) {
-case "name":
+        case "name":
           return (a.student_name_c || "").localeCompare(b.student_name_c || "");
         case "cgpa":
           return (b.cgpa_c || 0) - (a.cgpa_c || 0);
@@ -274,8 +280,8 @@ active: students.filter(s => s.enrollment_status_c === "Active").length,
                     <div>
                       <h3 className="font-semibold text-gray-900 text-lg leading-tight">
 {student.student_name_c || "Unnamed Student"}
-                      </h3>
-                      <p className="text-gray-500 text-sm">{student.studentEmail || "No email"}</p>
+</h3>
+                      <p className="text-gray-500 text-sm">{student.student_email_c || "No email"}</p>
                     </div>
                   </div>
 <Badge variant={getStatusBadge(student.enrollment_status_c)}>
