@@ -176,8 +176,8 @@ setFormData(prev => ({
           <button
             key={star}
             type="button"
-            onClick={() => setFormData(prev => ({ ...prev, studentSatisfactionRating: star }))}
-className={`p-1 rounded transition-colors ${
+onClick={() => setFormData(prev => ({ ...prev, student_satisfaction_rating_c: star }))}
+            className={`p-1 rounded transition-colors ${
               star <= formData.student_satisfaction_rating_c 
                 ? "text-yellow-400 hover:text-yellow-500" 
                 : "text-gray-300 hover:text-gray-400"
@@ -243,8 +243,8 @@ name="date_of_birth_c"
               <FormField
                 label="Student Email"
                 type="email"
-                name="studentEmail"
-                value={formData.studentEmail}
+name="student_email_c"
+                value={formData.student_email_c}
 onChange={handleChange}
                 placeholder="student@example.com"
                 error={errors.student_email_c}
@@ -254,8 +254,8 @@ onChange={handleChange}
             <FormField
               label="Emergency Contact"
               type="tel"
-              name="emergencyContact"
-value={formData.emergency_contact_c}
+name="emergency_contact_c"
+              value={formData.emergency_contact_c}
               onChange={handleChange}
               placeholder="+1-202-555-0199"
             />
@@ -268,8 +268,8 @@ value={formData.emergency_contact_c}
             <div className="grid grid-cols-2 gap-4">
               <FormField label="Grade Level">
                 <Select
-                  name="gradeLevel"
-                  value={formData.gradeLevel}
+name="grade_level_c"
+                  value={formData.grade_level_c}
 onChange={handleChange}
                 >
                   <option value="Freshman">Freshman</option>
@@ -318,12 +318,12 @@ name="attendance_percentage_c"
                   />
                   <div className="flex justify-between text-sm text-gray-600">
                     <span>0%</span>
-                    <span className="font-medium">{formData.attendancePercentage}%</span>
+                    <span className="font-medium">{formData.attendance_percentage_c}%</span>
                     <span>100%</span>
                   </div>
                 </div>
-                {errors.attendancePercentage && (
-                  <p className="text-sm text-error-600 mt-1">{errors.attendancePercentage}</p>
+                {errors.attendance_percentage_c && (
+                  <p className="text-sm text-error-600 mt-1">{errors.attendance_percentage_c}</p>
                 )}
               </FormField>
             </div>
@@ -334,8 +334,8 @@ name="attendance_percentage_c"
 <label key={subject} className="flex items-center space-x-2">
                     <input
                       type="checkbox"
-                      checked={formData.subjectsEnrolled.includes(subject)}
-                      onChange={() => handleMultiSelect("subjectsEnrolled", subject)}
+checked={formData.subjects_enrolled_c.includes(subject)}
+                      onChange={() => handleMultiSelect("subjects_enrolled_c", subject)}
                       className="w-4 h-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
                     />
                     <span className="text-sm text-gray-700">{subject}</span>
@@ -346,8 +346,8 @@ name="attendance_percentage_c"
 
             <FormField label="Assigned Counselor">
               <Select
-                name="assignedCounselor"
-value={formData.assigned_counselor_c}
+name="assigned_counselor_c"
+                value={formData.assigned_counselor_c}
                 onChange={handleChange}
               >
                 <option value="">Select from staff list</option>
@@ -369,7 +369,7 @@ value={formData.assigned_counselor_c}
                     <label key={status} className="flex items-center space-x-2">
                       <input
                         type="radio"
-                        name="enrollmentStatus"
+name="enrollment_status_c"
                         value={status}
 checked={formData.enrollment_status_c === status}
                         onChange={handleChange}
@@ -387,7 +387,7 @@ checked={formData.enrollment_status_c === status}
                     <label className="flex items-center space-x-2">
                       <input
                         type="checkbox"
-                        name="isEnrolled"
+name="is_enrolled_c"
 checked={formData.is_enrolled_c}
                         onChange={handleChange}
                         className="w-4 h-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
@@ -402,7 +402,7 @@ checked={formData.is_enrolled_c}
                     <label className="flex items-center space-x-2">
                       <input
                         type="checkbox"
-                        name="parentalConsentReceived"
+name="parental_consent_received_c"
 checked={formData.parental_consent_received_c}
                         onChange={handleChange}
                         className="w-4 h-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
@@ -452,7 +452,7 @@ type="datetime-local"
                     <button
                       key={interest}
                       type="button"
-                      onClick={() => handleMultiSelect("studentInterests", interest)}
+onClick={() => handleMultiSelect("student_interests_c", interest)}
                       className={`px-3 py-1 rounded-full text-sm border transition-colors ${
                         formData.studentInterests.includes(interest)
                           ? "bg-primary-500 text-white border-primary-500"
@@ -515,8 +515,8 @@ type="datetime-local"
             <FormField
               label="Portfolio Website"
               type="url"
-              name="studentPortfolioWebsite"
-value={formData.student_portfolio_website_c}
+name="student_portfolio_website_c"
+              value={formData.student_portfolio_website_c}
               onChange={handleChange}
               placeholder="https://portfolio.example.com"
               error={errors.student_portfolio_website_c}
