@@ -27,7 +27,9 @@ const renderInput = () => {
       case "tags":
       case "currency":
       case "checkbox":
-      case "radio":
+case "radio":
+        const Radio = React.lazy(() => import("@/components/atoms/Radio"));
+        return <Radio error={error} {...props} />;
       case "phone":
       case "website":
       case "datetime-local":
