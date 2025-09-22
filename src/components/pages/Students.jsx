@@ -329,18 +329,18 @@ active: students.filter(s => s.enrollment_status_c === "Active").length,
                     </div>
                   </div>
 
-                  {student.student_interests_c && (
+{student.student_interests_c && (
                     <div className="flex justify-between items-start">
                       <span className="text-sm text-gray-600">Interests:</span>
                       <div className="flex flex-wrap gap-1 justify-end max-w-32">
-                        {student.student_interests_c.slice(0, 2).map((interest, index) => (
+                        {student.student_interests_c.split('\n').filter(interest => interest.trim()).slice(0, 2).map((interest, index) => (
                           <Badge key={index} variant="default" className="text-xs">
-                            {interest}
+                            {interest.trim()}
                           </Badge>
                         ))}
-                        {student.student_interests_c.length > 2 && (
+                        {student.student_interests_c.split('\n').filter(interest => interest.trim()).length > 2 && (
                           <Badge variant="default" className="text-xs">
-                            +{student.student_interests_c.length - 2}
+                            +{student.student_interests_c.split('\n').filter(interest => interest.trim()).length - 2}
                           </Badge>
                         )}
                       </div>
