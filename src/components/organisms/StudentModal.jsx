@@ -41,8 +41,10 @@ setFormData({
         date_of_birth_c: editStudent.date_of_birth_c ? editStudent.date_of_birth_c.split('T')[0] : "",
         last_login_c: editStudent.last_login_c ? 
           new Date(editStudent.last_login_c).toISOString().slice(0, 16) : "",
-        subjects_enrolled_c: editStudent.subjects_enrolled_c || [],
-        student_interests_c: editStudent.student_interests_c || []
+subjects_enrolled_c: editStudent.subjects_enrolled_c || [],
+        student_interests_c: Array.isArray(editStudent.student_interests_c) 
+          ? editStudent.student_interests_c 
+          : (editStudent.student_interests_c ? editStudent.student_interests_c.split(',').map(s => s.trim()).filter(s => s) : [])
       });
     } else {
 setFormData({
@@ -153,10 +155,10 @@ cgpa_c: parseFloat(formData.cgpa_c),
   };
 
   const handleAddInterest = () => {
-if (tempInterest.trim() && !formData.student_interests_c.includes(tempInterest.trim())) {
+if (tempInterest.trim() && Array.isArray(formData.student_interests_c) && !formData.student_interests_c.includes(tempInterest.trim())) {
       setFormData(prev => ({
         ...prev,
-        student_interests_c: [...prev.student_interests_c, tempInterest.trim()]
+        student_interests_c: [...(prev.student_interests_c || []), tempInterest.trim()]
       }));
       setTempInterest("");
     }
@@ -467,7 +469,7 @@ type="datetime-local"
                   <div className="mt-4">
                     <h4 className="text-sm font-medium text-gray-700 mb-2">Selected Interests:</h4>
                     <div className="flex flex-wrap gap-2">
-                      {formData.student_interests_c.map((interest, index) => (
+{(formData.student_interests_c || []).map((interest, index) => (
                         <div
                           key={index}
                           className="flex items-center space-x-1 bg-primary-100 text-primary-800 px-2 py-1 rounded-full text-sm"
