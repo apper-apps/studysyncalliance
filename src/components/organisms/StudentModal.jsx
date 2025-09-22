@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import ApperIcon from "@/components/ApperIcon";
-import Modal from "@/components/atoms/Modal";
-import Button from "@/components/atoms/Button";
-import TextArea from "@/components/atoms/TextArea";
+import FormField from "@/components/molecules/FormField";
 import Input from "@/components/atoms/Input";
 import Select from "@/components/atoms/Select";
-import FormField from "@/components/molecules/FormField";
+import Button from "@/components/atoms/Button";
+import Modal from "@/components/atoms/Modal";
+import TextArea from "@/components/atoms/TextArea";
 
 const StudentModal = ({ isOpen, onClose, onSave, editStudent = null }) => {
 const [formData, setFormData] = useState({
@@ -289,7 +289,7 @@ label="CGPA"
                 step="0.01"
                 min="0"
                 max="4"
-                error={errors.cgpa}
+error={errors.cgpa_c}
               />
             </div>
 
@@ -447,39 +447,42 @@ type="datetime-local"
                     <ApperIcon name="Plus" size={14} />
                   </Button>
                 </div>
-                <div className="flex flex-wrap gap-2">
+<div className="flex flex-wrap gap-2">
                   {interestOptions.map((interest) => (
                     <button
                       key={interest}
                       type="button"
-onClick={() => handleMultiSelect("student_interests_c", interest)}
+                      onClick={() => handleMultiSelect("student_interests_c", interest)}
                       className={`px-3 py-1 rounded-full text-sm border transition-colors ${
-formData.studentInterests?.includes(interest) || false
+                        formData.student_interests_c?.includes(interest) || false
                           ? "bg-primary-500 text-white border-primary-500"
-: "bg-white text-gray-700 border-gray-300 hover:border-primary-500"
+                          : "bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200"
                       }`}
                     >
                       {interest}
                     </button>
                   ))}
                 </div>
-{(formData.studentInterests?.length || 0) > 0 && (
-                  <div className="flex flex-wrap gap-2">
-{formData.student_interests_c.map((interest, index) => (
-                      <div
-                        key={index}
-                        className="flex items-center space-x-1 bg-primary-100 text-primary-800 px-2 py-1 rounded-full text-sm"
-                      >
-                        <span>{interest}</span>
-                        <button
-                          type="button"
-                          onClick={() => handleRemoveInterest(interest)}
-                          className="text-primary-600 hover:text-primary-800"
+                {(formData.student_interests_c?.length || 0) > 0 && (
+                  <div className="mt-4">
+                    <h4 className="text-sm font-medium text-gray-700 mb-2">Selected Interests:</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {formData.student_interests_c.map((interest, index) => (
+                        <div
+                          key={index}
+                          className="flex items-center space-x-1 bg-primary-100 text-primary-800 px-2 py-1 rounded-full text-sm"
                         >
-                          <ApperIcon name="X" size={12} />
-                        </button>
-                      </div>
-                    ))}
+                          <span>{interest}</span>
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveInterest(interest)}
+                            className="text-primary-600 hover:text-primary-800"
+                          >
+                            <ApperIcon name="X" size={12} />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>

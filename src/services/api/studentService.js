@@ -114,16 +114,16 @@ export const studentService = {
           Name: studentData.Name || studentData.student_name_c,
           student_name_c: studentData.student_name_c,
           address_c: studentData.address_c,
-          cgpa_c: parseFloat(studentData.cgpa_c),
-          grade_level_c: studentData.grade_level_c,
-          subjects_enrolled_c: studentData.subjects_enrolled_c,
+student_email_c: studentData.student_email_c,
+          last_login_c: studentData.last_login_c ? new Date(studentData.last_login_c).toISOString() : null,
+          subjects_enrolled_c: Array.isArray(studentData.subjects_enrolled_c) ? studentData.subjects_enrolled_c.join(',') : studentData.subjects_enrolled_c,
           attendance_percentage_c: parseInt(studentData.attendance_percentage_c),
-          date_of_birth_c: studentData.date_of_birth_c,
+          date_of_birth_c: studentData.date_of_birth_c ? new Date(studentData.date_of_birth_c).toISOString().split('T')[0] : null,
           completed_credits_c: parseInt(studentData.completed_credits_c),
           is_enrolled_c: studentData.is_enrolled_c,
-          student_email_c: studentData.student_email_c,
-          last_login_c: studentData.last_login_c,
-          student_interests_c: studentData.student_interests_c,
+is_enrolled_c: studentData.is_enrolled_c,
+          student_interests_c: Array.isArray(studentData.student_interests_c) ? studentData.student_interests_c.join(',') : studentData.student_interests_c,
+          assigned_counselor_c: studentData.assigned_counselor_c,
           assigned_counselor_c: studentData.assigned_counselor_c,
           scholarship_amount_c: parseFloat(studentData.scholarship_amount_c),
           parental_consent_received_c: studentData.parental_consent_received_c,
@@ -149,11 +149,11 @@ export const studentService = {
         if (failedRecords.length > 0) {
           console.error(`Failed to create ${failedRecords.length} student records:${JSON.stringify(failedRecords)}`);
           
-          failedRecords.forEach(record => {
-            record.errors?.forEach(error => {
-              toast.error(`${error.fieldLabel}: ${error}`);
-            });
-            if (record.message) toast.error(record.message);
+failedRecords.forEach(record => {
+          record.errors?.forEach(error => {
+            toast.error(`${error.fieldLabel}: ${error.message}`);
+          });
+          if (record.message) toast.error(record.message);
           });
         }
         
@@ -190,16 +190,16 @@ export const studentService = {
           Name: updateData.Name || updateData.student_name_c,
           student_name_c: updateData.student_name_c,
           address_c: updateData.address_c,
-          cgpa_c: parseFloat(updateData.cgpa_c),
-          grade_level_c: updateData.grade_level_c,
-          subjects_enrolled_c: updateData.subjects_enrolled_c,
+student_email_c: updateData.student_email_c,
+          last_login_c: updateData.last_login_c ? new Date(updateData.last_login_c).toISOString() : null,
+          subjects_enrolled_c: Array.isArray(updateData.subjects_enrolled_c) ? updateData.subjects_enrolled_c.join(',') : updateData.subjects_enrolled_c,
           attendance_percentage_c: parseInt(updateData.attendance_percentage_c),
-          date_of_birth_c: updateData.date_of_birth_c,
+          date_of_birth_c: updateData.date_of_birth_c ? new Date(updateData.date_of_birth_c).toISOString().split('T')[0] : null,
           completed_credits_c: parseInt(updateData.completed_credits_c),
           is_enrolled_c: updateData.is_enrolled_c,
-          student_email_c: updateData.student_email_c,
-          last_login_c: updateData.last_login_c,
-          student_interests_c: updateData.student_interests_c,
+is_enrolled_c: updateData.is_enrolled_c,
+          student_interests_c: Array.isArray(updateData.student_interests_c) ? updateData.student_interests_c.join(',') : updateData.student_interests_c,
+          assigned_counselor_c: updateData.assigned_counselor_c,
           assigned_counselor_c: updateData.assigned_counselor_c,
           scholarship_amount_c: parseFloat(updateData.scholarship_amount_c),
           parental_consent_received_c: updateData.parental_consent_received_c,
