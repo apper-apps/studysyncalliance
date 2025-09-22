@@ -454,7 +454,7 @@ type="datetime-local"
                       type="button"
 onClick={() => handleMultiSelect("student_interests_c", interest)}
                       className={`px-3 py-1 rounded-full text-sm border transition-colors ${
-                        formData.studentInterests.includes(interest)
+formData.studentInterests?.includes(interest) || false
                           ? "bg-primary-500 text-white border-primary-500"
 : "bg-white text-gray-700 border-gray-300 hover:border-primary-500"
                       }`}
@@ -463,7 +463,7 @@ onClick={() => handleMultiSelect("student_interests_c", interest)}
                     </button>
                   ))}
                 </div>
-                {formData.studentInterests.length > 0 && (
+{(formData.studentInterests?.length || 0) > 0 && (
                   <div className="flex flex-wrap gap-2">
 {formData.student_interests_c.map((interest, index) => (
                       <div
