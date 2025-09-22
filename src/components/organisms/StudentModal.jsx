@@ -363,15 +363,15 @@ name="assigned_counselor_c"
             <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Status & Preferences</h3>
             
             <div className="grid grid-cols-2 gap-4">
-              <FormField label="Enrollment Status">
+<FormField label="Enrollment Status">
                 <div className="space-y-2">
-                  {["Active", "Graduated", "Dropped"].map((status) => (
+                  {["Active", "Inactive", "On Leave", "Graduated"].map((status) => (
                     <label key={status} className="flex items-center space-x-2">
                       <input
                         type="radio"
-name="enrollment_status_c"
+                        name="enrollment_status_c"
                         value={status}
-checked={formData.enrollment_status_c === status}
+                        checked={formData.enrollment_status_c === status}
                         onChange={handleChange}
                         className="w-4 h-4 text-primary-600 focus:ring-primary-500"
                       />

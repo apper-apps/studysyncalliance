@@ -67,11 +67,12 @@ if (window.confirm("Are you sure you want to delete this student? This action ca
     return variants[gradeLevel] || "default";
   };
 
-  const getStatusBadge = (status) => {
+const getStatusBadge = (status) => {
     const variants = {
       "Active": "success",
       "Graduated": "primary",
-      "Dropped": "error"
+      "Inactive": "error",
+      "On Leave": "warning"
     };
     return variants[status] || "default";
   };
@@ -190,15 +191,16 @@ active: students.filter(s => s.enrollment_status_c === "Active").length,
               <option value="Junior">Junior</option>
               <option value="Senior">Senior</option>
             </select>
-            <select
+<select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
               className="px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
             >
               <option value="all">All Status</option>
               <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+              <option value="On Leave">On Leave</option>
               <option value="Graduated">Graduated</option>
-              <option value="Dropped">Dropped</option>
             </select>
             <select
               value={sortBy}
