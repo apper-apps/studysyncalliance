@@ -28,8 +28,10 @@ student_name_c: "",
     enrollment_status_c: "Active",
     emergency_contact_c: "",
     student_portfolio_website_c: "",
-    student_satisfaction_rating_c: 5,
-    gender_c: "Male"
+student_satisfaction_rating_c: 5,
+    gender_c: "Male",
+    hostel_facility_c: "Yes",
+    languages_known_c: []
   });
 
   const [tempInterest, setTempInterest] = useState("");
@@ -46,9 +48,9 @@ subjects_enrolled_c: editStudent.subjects_enrolled_c || [],
         student_interests_c: Array.isArray(editStudent.student_interests_c) 
           ? editStudent.student_interests_c 
           : (editStudent.student_interests_c ? editStudent.student_interests_c.split(',').map(s => s.trim()).filter(s => s) : [])
-      });
+});
     } else {
-setFormData({
+      setFormData({
         student_name_c: "",
         address_c: "",
         cgpa_c: 0.00,
@@ -68,7 +70,9 @@ setFormData({
         emergency_contact_c: "",
         student_portfolio_website_c: "",
         student_satisfaction_rating_c: 5,
-        gender_c: "Male"
+gender_c: "Male",
+        hostel_facility_c: "Yes",
+        languages_known_c: []
       });
     }
     setErrors({});
@@ -274,8 +278,50 @@ name="emergency_contact_c"
                 { label: "Male", value: "Male" },
                 { label: "Female", value: "Female" },
                 { label: "Other", value: "Other" }
-              ]}
+]}
             />
+
+            <FormField
+              label="Languages Known"
+              type="checkbox"
+              name="languages_known_c"
+            >
+              <div className="grid grid-cols-2 gap-2">
+                {["English", "Hindi", "Marathi", "French"].map((language) => (
+                  <label key={language} className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      checked={formData.languages_known_c?.includes(language) || false}
+                      onChange={() => handleMultiSelect("languages_known_c", language)}
+                      className="w-4 h-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
+                    />
+                    <span className="text-sm text-gray-700">{language}</span>
+                  </label>
+                ))}
+              </div>
+            </FormField>
+
+            <FormField
+              label="Hostel Facility"
+              type="radio"
+              name="hostel_facility_c"
+            >
+              <div className="space-y-2">
+                {["Yes", "No"].map((option) => (
+                  <label key={option} className="flex items-center space-x-2">
+                    <input
+                      type="radio"
+                      name="hostel_facility_c"
+                      value={option}
+                      checked={formData.hostel_facility_c === option}
+                      onChange={handleChange}
+                      className="w-4 h-4 text-primary-600 focus:ring-primary-500"
+                    />
+                    <span className="text-sm text-gray-700">{option}</span>
+                  </label>
+                ))}
+              </div>
+            </FormField>
           </div>
 
           {/* Academic Information */}
