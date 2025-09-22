@@ -10,7 +10,7 @@ import TextArea from "@/components/atoms/TextArea";
 
 const StudentModal = ({ isOpen, onClose, onSave, editStudent = null }) => {
 const [formData, setFormData] = useState({
-    student_name_c: "",
+student_name_c: "",
     address_c: "",
     cgpa_c: 0.00,
     grade_level_c: "Freshman",
@@ -28,7 +28,8 @@ const [formData, setFormData] = useState({
     enrollment_status_c: "Active",
     emergency_contact_c: "",
     student_portfolio_website_c: "",
-    student_satisfaction_rating_c: 5
+    student_satisfaction_rating_c: 5,
+    gender_c: "Male"
   });
 
   const [tempInterest, setTempInterest] = useState("");
@@ -66,7 +67,8 @@ setFormData({
         enrollment_status_c: "Active",
         emergency_contact_c: "",
         student_portfolio_website_c: "",
-        student_satisfaction_rating_c: 5
+        student_satisfaction_rating_c: 5,
+        gender_c: "Male"
       });
     }
     setErrors({});
@@ -251,7 +253,7 @@ onChange={handleChange}
                 placeholder="student@example.com"
                 error={errors.student_email_c}
               />
-            </div>
+</div>
 
             <FormField
               label="Emergency Contact"
@@ -260,6 +262,19 @@ name="emergency_contact_c"
               value={formData.emergency_contact_c}
               onChange={handleChange}
               placeholder="+1-202-555-0199"
+            />
+
+            <FormField
+              label="Gender"
+              type="radio"
+              name="gender_c"
+              value={formData.gender_c}
+              onChange={handleChange}
+              options={[
+                { label: "Male", value: "Male" },
+                { label: "Female", value: "Female" },
+                { label: "Other", value: "Other" }
+              ]}
             />
           </div>
 
