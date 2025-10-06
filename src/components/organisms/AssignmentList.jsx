@@ -6,7 +6,7 @@ import PriorityTag from "@/components/molecules/PriorityTag";
 import ApperIcon from "@/components/ApperIcon";
 import { format, isAfter, isToday } from "date-fns";
 
-const AssignmentList = ({ assignments, courses, onEdit, onDelete, onToggleStatus }) => {
+const AssignmentList = ({ assignments, courses, onEdit, onDelete, onToggleStatus, currentUser }) => {
   const getCourseById = (courseId) => {
 return courses.find(course => course.Id === courseId);
   };
@@ -105,22 +105,26 @@ style={{ backgroundColor: course.color_c }}
                   </div>
                 </div>
                 
-                <div className="flex items-center space-x-2">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => onEdit(assignment)}
-                  >
-                    <ApperIcon name="Edit2" size={16} />
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => onDelete(assignment.Id)}
-                    className="text-error-600 hover:text-error-700 hover:bg-error-50"
-                  >
-                    <ApperIcon name="Trash2" size={16} />
-                  </Button>
+<div className="flex items-center space-x-2">
+                  {currentUser && assignment.owner === currentUser.userId && (
+                    <>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => onEdit(assignment)}
+                      >
+                        <ApperIcon name="Edit2" size={16} />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => onDelete(assignment.Id)}
+                        className="text-error-600 hover:text-error-700 hover:bg-error-50"
+                      >
+                        <ApperIcon name="Trash2" size={16} />
+                      </Button>
+                    </>
+                  )}
                 </div>
               </div>
             </Card.Content>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from 'react-redux';
 import Button from "@/components/atoms/Button";
 import SearchBar from "@/components/molecules/SearchBar";
 import AssignmentList from "@/components/organisms/AssignmentList";
@@ -13,6 +14,7 @@ import { toast } from "react-toastify";
 import { isAfter, isToday } from "date-fns";
 
 const Assignments = () => {
+  const { user } = useSelector((state) => state.user);
   const { courses } = useCourses();
   const { 
     assignments, 
@@ -132,11 +134,20 @@ const completed = assignments.filter(a => a.status_c === "completed").length;
             <h1 className="text-2xl font-bold text-gray-900">Assignments</h1>
             <p className="text-gray-600">Track and manage all your assignments</p>
           </div>
-          <Button onClick={() => setShowModal(true)}>
+<Button onClick={() => setShowModal(true)}>
             <ApperIcon name="Plus" size={16} className="mr-2" />
             Add Assignment
           </Button>
         </div>
+        
+        <AssignmentList
+          assignments={filteredAssignments}
+          courses={courses}
+          onEdit={handleEditAssignment}
+          onDelete={handleDeleteAssignment}
+          onToggleStatus={handleToggleStatus}
+          currentUser={user}
+        />
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
