@@ -9,10 +9,11 @@ export const courseService = {
         apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
       });
 
-      const params = {
+const params = {
         fields: [
           { field: { Name: "Id" } },
           { field: { Name: "Name" } },
+          { field: { Name: "Owner" } },
           { field: { Name: "name_c" } },
           { field: { Name: "code_c" } },
           { field: { Name: "instructor_c" } },
@@ -21,7 +22,8 @@ export const courseService = {
           { field: { Name: "schedule_c" } },
           { field: { Name: "current_grade_c" } },
           { field: { Name: "grade_categories_c" } }
-        ]
+        ],
+        where: []
       };
 
       const response = await apperClient.fetchRecords('course_c', params);
