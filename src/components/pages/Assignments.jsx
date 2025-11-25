@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector } from 'react-redux';
+import { useOutletContext } from 'react-router-dom';
 import Button from "@/components/atoms/Button";
 import SearchBar from "@/components/molecules/SearchBar";
 import AssignmentList from "@/components/organisms/AssignmentList";
@@ -14,7 +14,7 @@ import { toast } from "react-toastify";
 import { isAfter, isToday } from "date-fns";
 
 const Assignments = () => {
-  const { user } = useSelector((state) => state.user);
+  const { user } = useOutletContext();
   const { courses } = useCourses();
   const { 
     assignments, 

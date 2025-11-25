@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { Outlet, NavLink } from "react-router-dom";
+import { NavLink, Outlet, useOutletContext } from "react-router-dom";
+import { useAuth } from "@/layouts/Root";
 import ApperIcon from "@/components/ApperIcon";
 import Button from "@/components/atoms/Button";
 import { cn } from "@/utils/cn";
 
 const Layout = () => {
+  const { logout } = useAuth();
+  const outletContext = useOutletContext();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
 const navigation = [
@@ -55,13 +58,22 @@ const navigation = [
             </div>
           </div>
           
-          <nav className="flex-1 px-4 pb-4 space-y-1">
+<nav className="flex-1 px-4 pb-4 space-y-1">
             {navigation.map((item) => (
               <NavItem key={item.name} item={item} />
             ))}
           </nav>
           
           <div className="p-4 border-t border-gray-200">
+            <Button 
+              variant="outline" 
+              size="sm" 
+              onClick={logout}
+              className="w-full mb-3"
+            >
+              <ApperIcon name="LogOut" size={16} className="mr-2" />
+              Logout
+            </Button>
             <div className="text-xs text-gray-500 text-center">
               Academic Year 2024-25
             </div>
@@ -130,9 +142,9 @@ const navigation = [
           </div>
         </div>
 
-        {/* Main Content Area */}
+{/* Main Content Area */}
         <main className="flex-1 overflow-auto">
-          <Outlet />
+          <Outlet context={outletContext} />
         </main>
       </div>
     </div>
