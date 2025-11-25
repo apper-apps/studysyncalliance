@@ -22,7 +22,7 @@ style={{ backgroundColor: course.color_c }}
 {course.name_c}
             </h3>
             <p className="text-sm text-gray-500 mb-2">{course.code_c}</p>
-            <div className="flex items-center text-xs text-gray-400 space-x-4">
+<div className="flex items-center text-xs text-gray-400 space-x-4">
               <div className="flex items-center">
                 <ApperIcon name="User" size={12} className="mr-1" />
                 {course.instructor_c}
@@ -30,6 +30,10 @@ style={{ backgroundColor: course.color_c }}
               <div className="flex items-center">
                 <ApperIcon name="BookOpen" size={12} className="mr-1" />
                 {course.credits_c} credits
+              </div>
+              <div className="flex items-center">
+                <ApperIcon name="Calendar" size={12} className="mr-1" />
+                {course.CreatedOn ? format(new Date(course.CreatedOn), 'MMM d, yyyy') : 'N/A'}
               </div>
             </div>
           </div>
